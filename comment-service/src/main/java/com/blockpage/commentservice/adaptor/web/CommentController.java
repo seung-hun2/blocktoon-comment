@@ -1,7 +1,10 @@
 package com.blockpage.commentservice.adaptor.web;
 
+import com.blockpage.commentservice.adaptor.infrastructure.value.ReportType;
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
+import com.blockpage.commentservice.adaptor.web.view.ReportView;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -25,5 +28,15 @@ public class CommentController {
         commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "배드", 1, 2, 0, false, false, false));
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentViewList));
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<ApiResponseView> reportList(@RequestParam Long memberId) {
+        List<ReportView> reportViewList = new ArrayList<>();
+        reportViewList.add(new ReportView(1L, "부적절한사람1", "노잼", Date.valueOf("2023-05-06"), ReportType.ABUSE));
+        reportViewList.add(new ReportView(2L, "부적절한사람2", "진짜 노잼", Date.valueOf("2023-05-06"), ReportType.ABUSE));
+        reportViewList.add(new ReportView(3L, "부적절한사람3", "매우 노잼", Date.valueOf("2023-05-06"), ReportType.ABUSE));
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(reportViewList));
     }
 }
