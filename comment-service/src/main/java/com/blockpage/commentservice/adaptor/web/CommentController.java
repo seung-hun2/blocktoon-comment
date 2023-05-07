@@ -5,6 +5,7 @@ import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
 import com.blockpage.commentservice.adaptor.web.view.ReportView;
 import com.blockpage.commentservice.application.port.in.RequestComment;
+import com.blockpage.commentservice.application.port.in.RequestReport;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,12 @@ public class CommentController {
         commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "배드", 1, 2, 0, false, false, false));
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentViewList));
+    }
+
+    @PostMapping("/report")
+    public ResponseEntity report(@RequestBody RequestReport requestReport) {
+        // 신고하는 서비스 로직 구현 해야함
+        return ResponseEntity.status(HttpStatus.CREATED).body("해당 댓글이 신고 되었습니다.");
     }
 
     @GetMapping("/report")
