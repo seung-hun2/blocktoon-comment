@@ -2,11 +2,14 @@ package com.blockpage.commentservice.adaptor.web;
 
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
+import com.blockpage.commentservice.application.port.in.RequestComment;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("v1/comments")
 public class CommentController {
+    @PostMapping()
+    public ResponseEntity addComment(@RequestBody RequestComment requestComment) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>("댓글이 생성되었습니다."));
+    }
 
     @GetMapping()
     public ResponseEntity<ApiResponseView> comments(@RequestParam Long episodeId) {
