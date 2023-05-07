@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("v1/reports")
 public class ReportController {
+
     @PostMapping("")
     public ResponseEntity report(@RequestBody RequestReport requestReport) {
         // 신고하는 서비스 로직 구현 해야함
@@ -38,14 +39,14 @@ public class ReportController {
     }
 
     @PutMapping
-    public ResponseEntity acceptReport(@RequestBody RequestReport requestReport){
+    public ResponseEntity acceptReport(@RequestBody RequestReport requestReport) {
         // 신고 승인되는 서비스 로직 구현해야함
         // 해당 댓글의 report ( true 로 변경 ), 해당 ReportEntity 삭제 해야함
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>("해당 댓글 신고처리가 승인되어, 삭제되어집니다."));
     }
 
     @DeleteMapping
-    public ResponseEntity denyReport(@RequestBody RequestReport requestReport){
+    public ResponseEntity denyReport(@RequestBody RequestReport requestReport) {
         // 신고 거부되는 서비스 로직 구현해야함
         // 해당 reportEntity 삭제
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>("해당 댓글 신고처리가 거부되어, 삭제되어집니다."));
