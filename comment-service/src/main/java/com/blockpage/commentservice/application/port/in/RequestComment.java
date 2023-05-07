@@ -11,4 +11,9 @@ public class RequestComment {
     private Long childId;
     private Long childNickname;
     private String comment;
+    private int likesCount;
+    private int dislikesCount;
+    private Boolean report;
+    private Boolean erase;
+    private Boolean pin;
 }
