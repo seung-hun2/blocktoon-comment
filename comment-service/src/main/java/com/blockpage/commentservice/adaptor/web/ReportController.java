@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +39,7 @@ public class ReportController {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(reportViewList));
     }
 
-    @PutMapping
+    @PatchMapping
     public ResponseEntity acceptReport(@RequestBody RequestReport requestReport) {
         // 신고 승인되는 서비스 로직 구현해야함
         // 해당 댓글의 report ( true 로 변경 ), 해당 ReportEntity 삭제 해야함
