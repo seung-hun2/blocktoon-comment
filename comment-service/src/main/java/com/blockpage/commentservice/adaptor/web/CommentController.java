@@ -1,8 +1,11 @@
 package com.blockpage.commentservice.adaptor.web;
 
+import com.blockpage.commentservice.adaptor.infrastructure.value.ReportType;
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
+import com.blockpage.commentservice.adaptor.web.view.ReportView;
 import com.blockpage.commentservice.application.port.in.RequestComment;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("v1/comments")
 public class CommentController {
+
     @PostMapping()
     public ResponseEntity addComment(@RequestBody RequestComment requestComment) {
         // requestComment를 DB에 저장시키는 서비스 로직 구현해야함
@@ -26,13 +30,13 @@ public class CommentController {
     }
 
     @PatchMapping()
-    public ResponseEntity pinComment(@RequestBody RequestComment requestComment){
+    public ResponseEntity pinComment(@RequestBody RequestComment requestComment) {
         // 핀 고정하는 서비스 로직 구현 해야함 ( pin 속성값만 바꿔주면 됨 false -> true )
         return ResponseEntity.status(HttpStatus.OK).body("해당 댓글이 고정되었습니다.");
     }
 
     @DeleteMapping()
-    public ResponseEntity deleteComment(@RequestBody RequestComment requestComment){
+    public ResponseEntity deleteComment(@RequestBody RequestComment requestComment) {
         // 삭제하는 서비스 로직 구현 해야함 ( comment에 "삭제된 댓글입니다." + erase 속성값 바꿔주면 됨 false -> true )
         return ResponseEntity.status(HttpStatus.OK).body("해당 댓글이 삭제되었습니다.");
     }
@@ -47,5 +51,15 @@ public class CommentController {
         commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "배드", 1, 2, 0, false, false, false));
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentViewList));
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<ApiResponseView> reportList(@RequestParam Long memberId) {
+        List<ReportView> reportViewList = new ArrayList<>();
+        reportViewList.add(new ReportView(1L, "부적절한사람1", "노잼", Date.valueOf("2023-05-06"), ReportType.ABUSE));
+        reportViewList.add(new ReportView(2L, "부적절한사람2", "진짜 노잼", Date.valueOf("2023-05-06"), ReportType.ABUSE));
+        reportViewList.add(new ReportView(3L, "부적절한사람3", "매우 노잼", Date.valueOf("2023-05-06"), ReportType.ABUSE));
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(reportViewList));
     }
 }
