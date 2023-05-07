@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +29,12 @@ public class CommentController {
     public ResponseEntity pinComment(@RequestBody RequestComment requestComment){
         // 핀 고정하는 서비스 로직 구현 해야함 ( pin 속성값만 바꿔주면 됨 false -> true )
         return ResponseEntity.status(HttpStatus.OK).body("해당 댓글이 고정되었습니다.");
+    }
+
+    @DeleteMapping()
+    public ResponseEntity deleteComment(@RequestBody RequestComment requestComment){
+        // 삭제하는 서비스 로직 구현 해야함 ( comment에 "삭제된 댓글입니다." + erase 속성값 바꿔주면 됨 false -> true )
+        return ResponseEntity.status(HttpStatus.OK).body("해당 댓글이 삭제되었습니다.");
     }
 
     @GetMapping()
