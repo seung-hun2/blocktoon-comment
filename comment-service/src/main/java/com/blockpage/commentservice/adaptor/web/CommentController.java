@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
     @PostMapping()
     public ResponseEntity addComment(@RequestBody RequestComment requestComment) {
-
+        // requestComment를 DB에 저장시키는 서비스 로직 구현해야함
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>("댓글이 생성되었습니다."));
+    }
+
+    @PatchMapping()
+    public ResponseEntity pinComment(@RequestBody RequestComment requestComment){
+        // 핀 고정하는 서비스 로직 구현 해야함 ( pin 속성값만 바꿔주면 됨 false -> true )
+        return ResponseEntity.status(HttpStatus.OK).body("해당 댓글이 고정되었습니다.");
     }
 
     @GetMapping()
