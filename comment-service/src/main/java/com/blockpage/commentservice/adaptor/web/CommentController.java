@@ -1,14 +1,13 @@
 package com.blockpage.commentservice.adaptor.web;
 
-import com.blockpage.commentservice.adaptor.infrastructure.value.ReportType;
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
-import com.blockpage.commentservice.adaptor.web.view.ReportView;
+import com.blockpage.commentservice.application.port.in.CommentUseCase;
+import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
 import com.blockpage.commentservice.application.port.in.RequestComment;
-import com.blockpage.commentservice.application.port.in.RequestReport;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,12 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("v1/comments")
 public class CommentController {
 
+    private final CommentUseCase commentUseCase;
+
     @PostMapping()
-    public ResponseEntity addComment(@RequestBody RequestComment requestComment) {
-        // requestComment를 DB에 저장시키는 서비스 로직 구현해야함
+    public ResponseEntity<ApiResponseView<String>> addComment(@RequestBody RequestComment requestComment) {
+
+        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment));
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>("댓글이 생성되었습니다."));
     }
 
@@ -44,6 +47,7 @@ public class CommentController {
 
     @GetMapping()
     public ResponseEntity<ApiResponseView> comments(@RequestParam Long episodeId) {
+
         List<CommentView> commentViewList = new ArrayList<>();
         commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "명세 똑바로 하세요1", 120, 2, 3, false, false, true));
         commentViewList.add(new CommentView(1L, 2L, "백고은", null, null, "맨날 침대 다이부 하고 싶다~", 1, 225, 0, false, false, false));
