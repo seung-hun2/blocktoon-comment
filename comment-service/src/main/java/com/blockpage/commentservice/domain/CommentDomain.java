@@ -17,6 +17,7 @@ public class CommentDomain {
     private String content;
     private int likesCount;
     private int dislikesCount;
+    private int replyCount;
     private Boolean report;
     private Boolean erase;
     private Boolean pin;
@@ -32,6 +33,7 @@ public class CommentDomain {
             commentQuery.getContent(),
             commentQuery.getLikesCount(),
             commentQuery.getDislikesCount(),
+            commentQuery.getReplyCount(),
             commentQuery.getReport(),
             commentQuery.getErase(),
             commentQuery.getPin()

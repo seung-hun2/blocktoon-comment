@@ -25,12 +25,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/comments")
 public class CommentController {
 
+    private Long USERID = 1L;
+    private String NICKNAME = "승훈";
     private final CommentUseCase commentUseCase;
 
     @PostMapping()
     public ResponseEntity<ApiResponseView<String>> addComment(@RequestBody RequestComment requestComment) {
 
-        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment));
+        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, 1L, "nickname"));
+
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>("댓글이 생성되었습니다."));
     }
 

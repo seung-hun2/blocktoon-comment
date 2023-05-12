@@ -53,18 +53,32 @@ public interface CommentUseCase {
             this.pin = pin;
         }
 
-        public static CommentQuery toQueryFromRequest(RequestComment requestComment) {
+        public CommentQuery(Long commentId, Long episodeId, Long parentsId, String parentsNickname,
+            String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
+            this.commentId = commentId;
+            this.episodeId = episodeId;
+            this.parentsId = parentsId;
+            this.parentsNickname = parentsNickname;
+            this.content = content;
+            this.likesCount = likesCount;
+            this.dislikesCount = dislikesCount;
+            this.replyCount = replyCount;
+            this.report = report;
+            this.erase = erase;
+            this.pin = pin;
+        }
+
+        public static CommentQuery toQueryFromRequest(RequestComment requestComment, Long id, String nickname) {
             return CommentQuery.builder()
-                .commentId(requestComment.getCommentId())
                 .episodeId(requestComment.getEpisodeId())
                 .parentsId(requestComment.getParentsId())
                 .parentsNickname(requestComment.getParentsNickname())
-                .childId(requestComment.getChildId())
-                .childNickname(requestComment.getChildNickname())
+                .childId(id)
+                .childNickname(nickname)
+                .likesCount(0)
+                .dislikesCount(0)
                 .content(requestComment.getComment())
-                .likesCount(requestComment.getLikesCount())
-                .dislikesCount(requestComment.getDislikesCount())
-                .replyCount(requestComment.getReplyCount())
+                .replyCount(0)
                 .report(false)
                 .erase(false)
                 .pin(false)
@@ -91,6 +105,22 @@ public interface CommentUseCase {
                 .parentsNickname(commentEntity.getParentsNickname())
                 .childId(commentEntity.getChildId())
                 .childNickname(commentEntity.getChildNickname())
+                .content(commentEntity.getContent())
+                .likesCount(commentEntity.getLikesCount())
+                .dislikesCount(commentEntity.getDislikesCount())
+                .replyCount(commentEntity.getReplyCount())
+                .report(commentEntity.getReport())
+                .erase(commentEntity.getErase())
+                .pin(commentEntity.getPin())
+                .build();
+        }
+
+        public static CommentQuery toQueryFromEntity2(CommentEntity commentEntity) {
+            return CommentQuery.builder()
+                .commentId(commentEntity.getId())
+                .episodeId(commentEntity.getEpisodeId())
+                .parentsId(commentEntity.getParentsId())
+                .parentsNickname(commentEntity.getParentsNickname())
                 .content(commentEntity.getContent())
                 .likesCount(commentEntity.getLikesCount())
                 .dislikesCount(commentEntity.getDislikesCount())

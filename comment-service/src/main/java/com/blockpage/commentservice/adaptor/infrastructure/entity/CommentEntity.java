@@ -65,6 +65,7 @@ public class CommentEntity extends BaseEntity {
             .childId(commentDomain.getChildId())
             .childNickname(commentDomain.getChildNickname())
             .content(commentDomain.getContent())
+            .replyCount(commentDomain.getReplyCount())
             .likesCount(commentDomain.getLikesCount())
             .dislikesCount(commentDomain.getDislikesCount())
             .report(commentDomain.getReport())
@@ -72,4 +73,5 @@ public class CommentEntity extends BaseEntity {
             .pin(commentDomain.getPin())
             .build();
     }
+
 }

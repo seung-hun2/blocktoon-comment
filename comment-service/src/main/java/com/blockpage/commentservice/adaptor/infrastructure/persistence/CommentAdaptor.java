@@ -19,8 +19,11 @@ public class CommentAdaptor implements CommentPort {
 
     @Override
     public void saveComment(CommentDomain commentDomain) {
+
         CommentEntity commentEntity = CommentEntity.toEntityFromDomain(commentDomain);
         commentRepository.save(commentEntity);
+
+
     }
 
     @Override
