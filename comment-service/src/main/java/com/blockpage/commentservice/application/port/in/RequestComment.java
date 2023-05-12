@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public class RequestComment {
 
+    private Long commentId;
     private Long episodeId;
     private Long parentsId;
     private String parentsNickname;
@@ -13,6 +14,7 @@ public class RequestComment {
     private String comment;
     private int likesCount;
     private int dislikesCount;
+    private int replyCount;
     private Boolean report;
     private Boolean erase;
     private Boolean pin;

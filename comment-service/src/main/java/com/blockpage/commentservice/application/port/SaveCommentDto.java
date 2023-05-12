@@ -16,24 +16,27 @@ public class SaveCommentDto {
     private String comment;
     private int likesCount;
     private int dislikesCount;
+    private int replyCount;
     private Boolean report;
     private Boolean erase;
     private Boolean pin;
 
-    public static SaveCommentDto toDtoFromQuery(CommentQuery commentQuery){
+    public static SaveCommentDto toDtoFromQuery(CommentQuery commentQuery) {
         return SaveCommentDto.builder()
             .episodeId(commentQuery.getEpisodeId())
             .parentsId(commentQuery.getParentsId())
             .parentsNickname(commentQuery.getParentsNickname())
             .childId(commentQuery.getChildId())
             .childNickname(commentQuery.getChildNickname())
-            .comment(commentQuery.getComment())
+            .comment(commentQuery.getContent())
             .likesCount(commentQuery.getLikesCount())
             .dislikesCount(commentQuery.getDislikesCount())
-            .report(false)
-            .erase(false)
-            .pin(false)
+            .replyCount(commentQuery.getReplyCount())
+            .report(commentQuery.getReport())
+            .erase(commentQuery.getErase())
+            .pin(commentQuery.getPin())
             .build();
     }
+
 
 }
