@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(schema = "comment")
+@Table(name = "comment")
 public class CommentEntity {
 
     @Id
@@ -48,14 +48,23 @@ public class CommentEntity {
     @Column
     private Boolean pin;
 
-    public static CommentEntity toEntityFromDomain(CommentDomain commentDomain){
+    public void update(Boolean pin) {
+        this.pin = pin;
+    }
+
+    public void delete(Boolean erase, String content) {
+        this.erase = erase;
+        this.content = content;
+    }
+
+    public static CommentEntity toEntityFromDomain(CommentDomain commentDomain) {
         return CommentEntity.builder()
             .episodeId(commentDomain.getEpisodeId())
-            .childId(commentDomain.getChildId())
-            .childNickname(commentDomain.getChildNickname())
             .parentsId(commentDomain.getParentsId())
             .parentsNickname(commentDomain.getParentsNickname())
-            .content(commentDomain.getComment())
+            .childId(commentDomain.getChildId())
+            .childNickname(commentDomain.getChildNickname())
+            .content(commentDomain.getContent())
             .likesCount(commentDomain.getLikesCount())
             .dislikesCount(commentDomain.getDislikesCount())
             .report(commentDomain.getReport())
