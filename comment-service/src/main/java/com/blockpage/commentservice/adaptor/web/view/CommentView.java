@@ -1,5 +1,6 @@
 package com.blockpage.commentservice.adaptor.web.view;
 
+import com.blockpage.commentservice.application.port.SaveCommentDto;
 import lombok.Getter;
 
 @Getter
@@ -32,5 +33,20 @@ public class CommentView {
         this.report = report;
         this.erase = erase;
         this.pin = pin;
+    }
+
+    public static CommentView toViewFromDto(SaveCommentDto saveCommentDto) {
+        return new CommentView(saveCommentDto.getEpisodeId(),
+            saveCommentDto.getParentsId(),
+            saveCommentDto.getParentsNickname(),
+            saveCommentDto.getChildId(),
+            saveCommentDto.getChildNickname(),
+            saveCommentDto.getComment(),
+            saveCommentDto.getLikesCount(),
+            saveCommentDto.getDislikesCount(),
+            saveCommentDto.getReplyCount(),
+            saveCommentDto.getReport(),
+            saveCommentDto.getErase(),
+            saveCommentDto.getPin());
     }
 }
