@@ -42,7 +42,7 @@ public class ReportEntity extends BaseEntity {
             .memberNickname(reportDomain.getMemberNickname())
             .commentId(reportDomain.getCommentId())
             .content(reportDomain.getContent())
-            .reportType(ReportType.findReportTypeByKey(reportDomain.getReportType()))
+            .reportType(ReportType.findReportTypeByKey(reportDomain.getReportType().getKey()))
             .build();
     }
 }

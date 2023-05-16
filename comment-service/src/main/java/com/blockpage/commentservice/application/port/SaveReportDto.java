@@ -25,7 +25,7 @@ public class SaveReportDto {
         return new SaveReportDto(
             reportDomain.getMemberId(),
             reportDomain.getMemberId(),
-            reportDomain.getReportType()
+            reportDomain.getReportType().getKey()
         );
     }
 

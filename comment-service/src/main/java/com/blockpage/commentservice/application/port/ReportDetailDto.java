@@ -20,7 +20,7 @@ public class ReportDetailDto {
             .memberNickname(reportDomain.getMemberNickname())
             .content(reportDomain.getContent())
             .reportDate(reportDomain.getReportDate())
-            .reportType(ReportType.findReportTypeByKey(reportDomain.getReportType()))
+            .reportType(ReportType.findReportTypeByKey(reportDomain.getReportType().getKey()))
             .build();
     }
 }
