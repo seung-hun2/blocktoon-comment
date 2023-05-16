@@ -53,12 +53,10 @@ public class CommentService implements CommentUseCase {
     public List<SaveCommentDto> getComment(CommentQuery commentQuery) {
 
         CommentDomain commentDomain = CommentDomain.toDomainFrom(commentQuery);
-        List<CommentQuery> commentQueryList = commentPort.getComment(commentDomain);
+        List<CommentDomain> commentDomainList = commentPort.getComment(commentDomain);
+        List<CommentDomain> result = CommentDomain.getComment(commentDomainList);
 
-        List<CommentQuery> result = commentQueryList.stream()
-            .filter(w -> !(w.getErase() && w.getReplyCount() == 0)).toList();
-
-        return result.stream().map(SaveCommentDto::toDtoFromQuery).collect(Collectors.toList());
+        return result.stream().map(SaveCommentDto::toDtoFromDomain).collect(Collectors.toList());
 
     }
 
@@ -66,11 +64,9 @@ public class CommentService implements CommentUseCase {
     public List<SaveCommentDto> getReply(CommentQuery commentQuery) {
 
         CommentDomain commentDomain = CommentDomain.toDomainFrom(commentQuery);
-        List<CommentQuery> commentQueryList = commentPort.getReply(commentDomain);
+        List<CommentDomain> commentDomainList = commentPort.getReply(commentDomain);
+        List<CommentDomain> result = CommentDomain.getComment(commentDomainList);
 
-        List<CommentQuery> result = commentQueryList.stream()
-            .filter(w -> !(w.getErase() && w.getReplyCount() == 0)).toList();
-
-        return result.stream().map(SaveCommentDto::toDtoFromQuery).collect(Collectors.toList());
+        return result.stream().map(SaveCommentDto::toDtoFromDomain).collect(Collectors.toList());
     }
 }

@@ -1,6 +1,7 @@
 package com.blockpage.commentservice.application.port;
 
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
+import com.blockpage.commentservice.domain.CommentDomain;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -35,6 +36,23 @@ public class SaveCommentDto {
             .report(commentQuery.getReport())
             .erase(commentQuery.getErase())
             .pin(commentQuery.getPin())
+            .build();
+    }
+
+    public static SaveCommentDto toDtoFromDomain(CommentDomain commentDomain){
+        return SaveCommentDto.builder()
+            .episodeId(commentDomain.getEpisodeId())
+            .parentsId(commentDomain.getParentsId())
+            .parentsNickname(commentDomain.getParentsNickname())
+            .childId(commentDomain.getChildId())
+            .childNickname(commentDomain.getChildNickname())
+            .comment(commentDomain.getContent())
+            .likesCount(commentDomain.getLikesCount())
+            .dislikesCount(commentDomain.getDislikesCount())
+            .replyCount(commentDomain.getReplyCount())
+            .report(commentDomain.getReport())
+            .erase(commentDomain.getErase())
+            .pin(commentDomain.getPin())
             .build();
     }
 

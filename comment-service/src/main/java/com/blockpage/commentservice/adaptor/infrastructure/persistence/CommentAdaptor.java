@@ -2,7 +2,6 @@ package com.blockpage.commentservice.adaptor.infrastructure.persistence;
 
 import com.blockpage.commentservice.adaptor.infrastructure.entity.CommentEntity;
 import com.blockpage.commentservice.adaptor.infrastructure.repository.CommentRepository;
-import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
 import com.blockpage.commentservice.application.port.out.CommentPort;
 import com.blockpage.commentservice.domain.CommentDomain;
 import jakarta.transaction.Transactional;
@@ -50,15 +49,15 @@ public class CommentAdaptor implements CommentPort {
     }
 
     @Override
-    public List<CommentQuery> getComment(CommentDomain commentDomain) {
+    public List<CommentDomain> getComment(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findByEpisodeId(commentDomain.getEpisodeId());
-        return commentEntityList.stream().map(CommentQuery::toQueryFromEntity).toList();
+        return commentEntityList.stream().map(CommentDomain::toDomainFromEntity).toList();
     }
 
     @Override
-    public List<CommentQuery> getReply(CommentDomain commentDomain) {
+    public List<CommentDomain> getReply(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findByParentsId(commentDomain.getCommentId());
 
-        return commentEntityList.stream().map(CommentQuery::toQueryFromEntity).toList();
+        return commentEntityList.stream().map(CommentDomain::toDomainFromEntity).toList();
     }
 }

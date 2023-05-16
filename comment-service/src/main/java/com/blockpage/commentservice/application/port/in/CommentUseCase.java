@@ -116,22 +116,6 @@ public interface CommentUseCase {
                 .pin(commentEntity.getPin())
                 .build();
         }
-
-        public static CommentQuery toQueryFromEntity2(CommentEntity commentEntity) {
-            return CommentQuery.builder()
-                .commentId(commentEntity.getId())
-                .episodeId(commentEntity.getEpisodeId())
-                .parentsId(commentEntity.getParentsId())
-                .parentsNickname(commentEntity.getParentsNickname())
-                .content(commentEntity.getContent())
-                .likesCount(commentEntity.getLikesCount())
-                .dislikesCount(commentEntity.getDislikesCount())
-                .replyCount(commentEntity.getReplyCount())
-                .report(commentEntity.getReport())
-                .erase(commentEntity.getErase())
-                .pin(commentEntity.getPin())
-                .build();
-        }
     }
 
 }

@@ -1,6 +1,8 @@
 package com.blockpage.commentservice.domain;
 
+import com.blockpage.commentservice.adaptor.infrastructure.entity.CommentEntity;
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -44,6 +46,27 @@ public class CommentDomain {
         return CommentDomain.builder()
             .commentId(commentId)
             .build();
+    }
+
+    public static CommentDomain toDomainFromEntity(CommentEntity commentEntity){
+        return CommentDomain.builder()
+            .episodeId(commentEntity.getEpisodeId())
+            .parentsId(commentEntity.getParentsId())
+            .parentsNickname(commentEntity.getParentsNickname())
+            .childId(commentEntity.getChildId())
+            .childNickname(commentEntity.getChildNickname())
+            .content(commentEntity.getContent())
+            .likesCount(commentEntity.getLikesCount())
+            .dislikesCount(commentEntity.getDislikesCount())
+            .replyCount(commentEntity.getReplyCount())
+            .report(commentEntity.getReport())
+            .erase(commentEntity.getErase())
+            .pin(commentEntity.getPin())
+            .build();
+    }
+
+    public static List<CommentDomain> getComment(List<CommentDomain> commentDomain){
+        return commentDomain.stream().filter(w -> !(w.getErase() && w.getReplyCount() == 0)).toList();
     }
 
 }

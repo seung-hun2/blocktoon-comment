@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/comments")
 public class CommentController {
 
-    private Long USERID = 1L;
-    private String NICKNAME = "승훈";
+    private final Long USERID = 1L;
+    private final String NICKNAME = "승훈";
     private final CommentUseCase commentUseCase;
 
     @PostMapping()
@@ -59,15 +59,6 @@ public class CommentController {
         commentViewList = saveCommentDtos.stream().map(CommentView::toViewFromDto).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentViewList));
-
-//        List<CommentView> commentViewList = new ArrayList<>();
-//        commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "명세 똑바로 하세요1", 120, 2, 3, false, false, true));
-//        commentViewList.add(new CommentView(1L, 2L, "백고은", null, null, "맨날 침대 다이부 하고 싶다~", 1, 225, 0, false, false, false));
-//        commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "굿", 12, 2, 0, false, false, false));
-//        commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "낫배드", 15, 2, 0, false, false, false));
-//        commentViewList.add(new CommentView(1L, 1L, "김태근", null, null, "배드", 1, 2, 0, false, false, false));
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentViewList));
     }
 
     @GetMapping("/reply/{commentId}")
