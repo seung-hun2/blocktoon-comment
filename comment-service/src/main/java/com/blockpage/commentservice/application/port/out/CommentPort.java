@@ -10,6 +10,7 @@ public interface CommentPort {
 
     void pinComment(CommentDomain commentDomain);
     void deleteComment(CommentDomain commentDomain);
+    void reportComment(CommentDomain commentDomain);
     List<CommentQuery> getComment(CommentDomain commentDomain);
     List<CommentQuery> getReply(CommentDomain commentDomain);
 

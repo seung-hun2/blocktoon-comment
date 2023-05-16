@@ -14,6 +14,8 @@ public interface CommentUseCase {
 
     SaveCommentDto deleteComment(CommentQuery commentQuery);
 
+    void reportComment(Long commentId);
+
     List<SaveCommentDto> getComment(CommentQuery commentQuery);
 
     List<SaveCommentDto> getReply(CommentQuery commentQuery);

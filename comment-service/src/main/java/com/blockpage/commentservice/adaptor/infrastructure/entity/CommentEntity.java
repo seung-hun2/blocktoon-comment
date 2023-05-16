@@ -57,6 +57,11 @@ public class CommentEntity extends BaseEntity {
         this.content = content;
     }
 
+    public void report(Boolean report, String content) {
+        this.report = report;
+        this.content = content;
+    }
+
     public static CommentEntity toEntityFromDomain(CommentDomain commentDomain) {
         return CommentEntity.builder()
             .episodeId(commentDomain.getEpisodeId())

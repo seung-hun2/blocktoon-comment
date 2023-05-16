@@ -43,6 +43,13 @@ public class CommentAdaptor implements CommentPort {
     }
 
     @Override
+    @Transactional
+    public void reportComment(CommentDomain commentDomain) {
+        Optional<CommentEntity> commentEntity = commentRepository.findById(commentDomain.getCommentId());
+        commentEntity.get().report(true, "신고되어 삭제된 댓글 입니다.");
+    }
+
+    @Override
     public List<CommentQuery> getComment(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findByEpisodeId(commentDomain.getEpisodeId());
         return commentEntityList.stream().map(CommentQuery::toQueryFromEntity).toList();
