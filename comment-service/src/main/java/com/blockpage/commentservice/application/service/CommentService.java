@@ -44,6 +44,12 @@ public class CommentService implements CommentUseCase {
     }
 
     @Override
+    public void reportComment(Long commentId) {
+        CommentDomain commentDomain = CommentDomain.toDomainFromId(commentId);
+        commentPort.reportComment(commentDomain);
+    }
+
+    @Override
     public List<SaveCommentDto> getComment(CommentQuery commentQuery) {
 
         CommentDomain commentDomain = CommentDomain.toDomainFrom(commentQuery);

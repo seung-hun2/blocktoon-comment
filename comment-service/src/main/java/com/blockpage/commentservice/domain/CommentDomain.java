@@ -40,4 +40,10 @@ public class CommentDomain {
         );
     }
 
+    public static CommentDomain toDomainFromId(Long commentId) {
+        return CommentDomain.builder()
+            .commentId(commentId)
+            .build();
+    }
+
 }
