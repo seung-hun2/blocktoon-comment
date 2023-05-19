@@ -2,10 +2,13 @@ package com.blockpage.commentservice.adaptor.web.view;
 
 import com.blockpage.commentservice.adaptor.infrastructure.value.ReportType;
 import com.blockpage.commentservice.application.port.ReportDetailDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
+@JsonInclude(Include.NON_NULL)
 public class ReportView {
 
     private String memberNickname;

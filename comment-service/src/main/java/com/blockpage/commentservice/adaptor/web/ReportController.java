@@ -1,6 +1,7 @@
 package com.blockpage.commentservice.adaptor.web;
 
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
+import com.blockpage.commentservice.adaptor.web.view.MessageView;
 import com.blockpage.commentservice.adaptor.web.view.ReportView;
 import com.blockpage.commentservice.application.port.ReportDetailDto;
 import com.blockpage.commentservice.application.port.in.CommentUseCase;
@@ -30,10 +31,10 @@ public class ReportController {
     private final CommentUseCase commentUseCase;
 
     @PostMapping("")
-    public ResponseEntity<ApiResponseView<String>> postRepost(@RequestBody RequestReport requestReport) {
+    public ResponseEntity<ApiResponseView<MessageView>> postRepost(@RequestBody RequestReport requestReport) {
         // 신고하는 서비스 로직 구현 해야함
         reportUseCase.saveReport(ReportQuery.toQueryFromRequest(requestReport));
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>("해당 댓글이 신고 되었습니다."));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>(new MessageView("해당 댓글이 신고 되었습니다.")));
     }
 
     @GetMapping("")
@@ -46,18 +47,18 @@ public class ReportController {
     }
 
     @PatchMapping
-    public ResponseEntity<ApiResponseView<String>> acceptReport(@RequestBody RequestReport requestReport) {
+    public ResponseEntity<ApiResponseView<MessageView>> acceptReport(@RequestBody RequestReport requestReport) {
 
         reportUseCase.solveReport(ReportQuery.toQueryFromRequest(requestReport));
         commentUseCase.reportComment(CommentQuery.toQueryFromId(requestReport.getCommentId()).getCommentId());
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>("해당 댓글 신고처리가 승인되어, 삭제되어집니다."));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글 신고처리가 승인되어, 삭제되어집니다.")));
     }
 
     @DeleteMapping
-    public ResponseEntity<ApiResponseView<String>> denyReport(@RequestBody RequestReport requestReport) {
+    public ResponseEntity<ApiResponseView<MessageView>> denyReport(@RequestBody RequestReport requestReport) {
 
         reportUseCase.solveReport(ReportQuery.toQueryFromRequest(requestReport));
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>("해당 댓글 신고처리가 거부되어, 삭제되어집니다."));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글 신고처리가 거부되어, 삭제되어집니다.")));
     }
 
 }
