@@ -2,6 +2,7 @@ package com.blockpage.commentservice.adaptor.web;
 
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
+import com.blockpage.commentservice.adaptor.web.view.MessageView;
 import com.blockpage.commentservice.application.port.SaveCommentDto;
 import com.blockpage.commentservice.application.port.in.CommentUseCase;
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
@@ -30,25 +31,25 @@ public class CommentController {
     private final CommentUseCase commentUseCase;
 
     @PostMapping()
-    public ResponseEntity<ApiResponseView<String>> addComment(@RequestBody RequestComment requestComment) {
+    public ResponseEntity<ApiResponseView<MessageView>> addComment(@RequestBody RequestComment requestComment) {
 
         commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, 1L, "nickname"));
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>("댓글이 생성되었습니다."));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>(new MessageView("댓글이 생성되었습니다.")));
     }
 
     @PatchMapping("/{commentId}")
-    public ResponseEntity<ApiResponseView<String>> pinComment(@PathVariable Long id) {
+    public ResponseEntity<ApiResponseView<MessageView>> pinComment(@PathVariable Long id) {
 
         commentUseCase.pinComment(CommentQuery.toQueryFromId(id));
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>("해당 댓글이 고정되었습니다."));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글이 고정되었습니다.")));
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<ApiResponseView<String>> deleteComment(@PathVariable Long id) {
+    public ResponseEntity<ApiResponseView<MessageView>> deleteComment(@PathVariable Long id) {
 
         commentUseCase.deleteComment(CommentQuery.toQueryFromId(id));
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>("해당 댓글이 삭제되었습니다."));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글이 삭제되었습니다.")));
     }
 
     @GetMapping("/{episodeId}")

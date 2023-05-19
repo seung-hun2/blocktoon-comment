@@ -1,9 +1,12 @@
 package com.blockpage.commentservice.adaptor.web.view;
 
 import com.blockpage.commentservice.application.port.SaveCommentDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Getter;
 
 @Getter
+@JsonInclude(Include.NON_NULL)
 public class CommentView {
 
     private Long episodeId;
