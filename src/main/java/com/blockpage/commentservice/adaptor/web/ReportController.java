@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("v1/reports")
+@RequestMapping("/comment-service/v1/reports")
 public class ReportController {
 
     private final ReportUseCase reportUseCase;

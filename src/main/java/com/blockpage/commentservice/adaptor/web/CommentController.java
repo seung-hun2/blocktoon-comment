@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("v1/comments")
+@RequestMapping("/comment-service/v1/comments")
 public class CommentController {
 
     private final Long USERID = 1L;
