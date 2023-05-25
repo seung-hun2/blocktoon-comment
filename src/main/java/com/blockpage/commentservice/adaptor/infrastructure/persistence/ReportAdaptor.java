@@ -4,8 +4,9 @@ import com.blockpage.commentservice.adaptor.infrastructure.entity.ReportEntity;
 import com.blockpage.commentservice.adaptor.infrastructure.repository.ReportRepository;
 import com.blockpage.commentservice.application.port.out.ReportPort;
 import com.blockpage.commentservice.domain.ReportDomain;
-import jakarta.transaction.Transactional;
+
 import java.util.List;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
