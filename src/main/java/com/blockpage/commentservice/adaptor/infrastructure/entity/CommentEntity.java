@@ -26,11 +26,11 @@ public class CommentEntity extends BaseEntity {
     @Column
     private Long episodeId;
     @Column
-    private Long parentsId;
+    private String parentsId;
     @Column
     private String parentsNickname;
     @Column
-    private Long childId;
+    private String childId;
     @Column
     private String childNickname;
     @Column

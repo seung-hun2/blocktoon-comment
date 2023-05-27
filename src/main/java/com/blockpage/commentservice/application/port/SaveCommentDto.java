@@ -10,9 +10,9 @@ import lombok.Getter;
 public class SaveCommentDto {
 
     private Long episodeId;
-    private Long parentsId;
+    private String parentsId;
     private String parentsNickname;
-    private Long childId;
+    private String childId;
     private String childNickname;
     private String comment;
     private int likesCount;

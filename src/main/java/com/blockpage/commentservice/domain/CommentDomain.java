@@ -12,9 +12,9 @@ public class CommentDomain {
 
     private Long commentId;
     private Long episodeId;
-    private Long parentsId;
+    private String parentsId;
     private String parentsNickname;
-    private Long childId;
+    private String childId;
     private String childNickname;
     private String content;
     private int likesCount;

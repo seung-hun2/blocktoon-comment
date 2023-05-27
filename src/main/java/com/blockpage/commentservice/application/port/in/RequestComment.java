@@ -7,7 +7,7 @@ public class RequestComment {
 
     private Long episodeId;
     private String comment;
-    private Long parentsId;
+    private String parentsId;
     private String parentsNickname;
 
 }

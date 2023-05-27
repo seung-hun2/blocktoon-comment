@@ -26,9 +26,9 @@ public interface CommentUseCase {
 
         private Long commentId;
         private Long episodeId;
-        private Long parentsId;
+        private String parentsId;
         private String parentsNickname;
-        private Long childId;
+        private String childId;
         private String childNickname;
         private String content;
         private int likesCount;
@@ -38,7 +38,7 @@ public interface CommentUseCase {
         private Boolean erase;
         private Boolean pin;
 
-        public CommentQuery(Long commentId, Long episodeId, Long parentsId, String parentsNickname, Long childId, String childNickname,
+        public CommentQuery(Long commentId, Long episodeId, String parentsId, String parentsNickname, String childId, String childNickname,
             String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
             this.commentId = commentId;
             this.episodeId = episodeId;
@@ -55,7 +55,7 @@ public interface CommentUseCase {
             this.pin = pin;
         }
 
-        public CommentQuery(Long commentId, Long episodeId, Long parentsId, String parentsNickname,
+        public CommentQuery(Long commentId, Long episodeId, String parentsId, String parentsNickname,
             String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
             this.commentId = commentId;
             this.episodeId = episodeId;
@@ -70,7 +70,7 @@ public interface CommentUseCase {
             this.pin = pin;
         }
 
-        public static CommentQuery toQueryFromRequest(RequestComment requestComment, Long id, String nickname) {
+        public static CommentQuery toQueryFromRequest(RequestComment requestComment, String id, String nickname) {
             return CommentQuery.builder()
                 .episodeId(requestComment.getEpisodeId())
                 .parentsId(requestComment.getParentsId())

@@ -29,7 +29,7 @@ public class ReportEntity extends BaseEntity {
     @Column
     private String content;
     @Column
-    private Long memberId;
+    private String memberId;
     @Column
     private String memberNickname;
     @Column

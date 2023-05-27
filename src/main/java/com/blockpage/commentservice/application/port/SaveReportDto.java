@@ -9,7 +9,7 @@ import lombok.Getter;
 @Builder
 public class SaveReportDto {
 
-    Long memberId;
+    String memberId;
     Long reportId;
     int reportType;
 
@@ -21,12 +21,5 @@ public class SaveReportDto {
         );
     }
 
-    public static SaveReportDto toDtoFromDomain(ReportDomain reportDomain) {
-        return new SaveReportDto(
-            reportDomain.getMemberId(),
-            reportDomain.getMemberId(),
-            reportDomain.getReportType().getKey()
-        );
-    }
 
 }

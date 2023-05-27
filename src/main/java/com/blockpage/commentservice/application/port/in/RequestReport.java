@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class RequestReport {
 
-    private Long memberId;
+    private String memberId;
     private Long commentId;
     private String memberNickname;
     private String content;
