@@ -10,9 +10,9 @@ import lombok.Getter;
 public class CommentView {
 
     private Long episodeId;
-    private Long parentsId;
+    private String parentsId;
     private String parentsNickname;
-    private Long childId;
+    private String childId;
     private String childNickname;
     private String content;
     private int likesCount;
@@ -22,7 +22,7 @@ public class CommentView {
     private Boolean erase;
     private Boolean pin;
 
-    public CommentView(Long episodeId, Long parentsId, String parentsNickname, Long childId, String childNickname, String content,
+    public CommentView(Long episodeId, String parentsId, String parentsNickname, String childId, String childNickname, String content,
         int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
         this.episodeId = episodeId;
         this.parentsId = parentsId;

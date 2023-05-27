@@ -12,7 +12,7 @@ import lombok.Getter;
 @Builder
 public class ReportDomain {
 
-    private Long memberId;
+    private String memberId;
     private Long commentId;
     private ReportType reportType;
     private String memberNickname;

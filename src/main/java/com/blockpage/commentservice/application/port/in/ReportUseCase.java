@@ -18,7 +18,7 @@ public interface ReportUseCase {
     @Builder
     class ReportQuery {
 
-        Long memberId;
+        String memberId;
         Long reportId;
         Long commentId;
         String memberNickname;
