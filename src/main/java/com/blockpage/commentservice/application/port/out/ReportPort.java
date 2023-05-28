@@ -6,6 +6,6 @@ import java.util.List;
 public interface ReportPort {
     void saveReport(ReportDomain reportDomain);
     void solveReport(ReportDomain reportDomain);
-    List<ReportDomain> getReport(Long commentId);
+    List<ReportDomain> getReport();
 
 }

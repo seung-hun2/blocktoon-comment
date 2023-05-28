@@ -29,7 +29,7 @@ public class ReportAdaptor implements ReportPort {
     }
 
     @Override
-    public List<ReportDomain> getReport(Long commentId) {
+    public List<ReportDomain> getReport() {
 
         List<ReportEntity> reportEntityList = reportRepository.findAll();
 

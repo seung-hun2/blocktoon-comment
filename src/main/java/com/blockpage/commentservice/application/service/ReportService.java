@@ -32,8 +32,8 @@ public class ReportService implements ReportUseCase {
     }
 
     @Override
-    public List<ReportDetailDto> getReport(ReportQuery reportQuery) {
-        List<ReportDomain> reportDomainList = reportPort.getReport(reportQuery.getCommentId());
+    public List<ReportDetailDto> getReport() {
+        List<ReportDomain> reportDomainList = reportPort.getReport();
 
         return reportDomainList.stream().map(ReportDetailDto::toDtoFromDomain).toList();
     }
