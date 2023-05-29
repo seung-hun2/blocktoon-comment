@@ -30,17 +30,17 @@ public class ReportController {
     private final ReportUseCase reportUseCase;
     private final CommentUseCase commentUseCase;
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<ApiResponseView<MessageView>> postRepost(@RequestBody RequestReport requestReport) {
         // 신고하는 서비스 로직 구현 해야함
         reportUseCase.saveReport(ReportQuery.toQueryFromRequest(requestReport));
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>(new MessageView("해당 댓글이 신고 되었습니다.")));
     }
 
-    @GetMapping("")
-    public ResponseEntity<ApiResponseView<List<ReportView>>> getReport(@RequestParam Long id) {
+    @GetMapping
+    public ResponseEntity<ApiResponseView<List<ReportView>>> getReport() {
 
-        List<ReportDetailDto> reportDetailDtoList = reportUseCase.getReport(ReportQuery.toQueryFromId(id));
+        List<ReportDetailDto> reportDetailDtoList = reportUseCase.getReport();
         List<ReportView> reportViewList = reportDetailDtoList.stream().map(ReportView::toViewFromDto).toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(reportViewList));

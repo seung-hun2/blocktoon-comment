@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,20 +27,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/comment-service/v1/comments")
 public class CommentController {
 
-    private final String USERID = "xxx@gmail.com";
-    private final String NICKNAME = "승훈";
     private final CommentUseCase commentUseCase;
 
     @PostMapping()
-    public ResponseEntity<ApiResponseView<MessageView>> addComment(@RequestBody RequestComment requestComment) {
+    public ResponseEntity<ApiResponseView<MessageView>> addComment(@RequestBody RequestComment requestComment,
+        @RequestHeader String memberId, @RequestHeader String nickName) {
 
-        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, USERID, "nickname"));
+        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, memberId, nickName));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>(new MessageView("댓글이 생성되었습니다.")));
     }
 
     @PatchMapping("/{commentId}")
     public ResponseEntity<ApiResponseView<MessageView>> pinComment(@PathVariable Long id) {
+        // 작가만 가능 해야함
 
         commentUseCase.pinComment(CommentQuery.toQueryFromId(id));
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글이 고정되었습니다.")));
@@ -47,6 +48,7 @@ public class CommentController {
 
     @DeleteMapping("/{commentId}")
     public ResponseEntity<ApiResponseView<MessageView>> deleteComment(@PathVariable Long id) {
+        // 댓글 남긴 사람만 가능 해야함
 
         commentUseCase.deleteComment(CommentQuery.toQueryFromId(id));
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글이 삭제되었습니다.")));

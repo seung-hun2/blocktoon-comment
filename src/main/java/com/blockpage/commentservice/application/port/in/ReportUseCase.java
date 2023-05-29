@@ -12,7 +12,7 @@ public interface ReportUseCase {
 
     SaveReportDto solveReport(ReportQuery reportQuery);
 
-    List<ReportDetailDto> getReport(ReportQuery reportQuery);
+    List<ReportDetailDto> getReport();
 
     @Getter
     @Builder
