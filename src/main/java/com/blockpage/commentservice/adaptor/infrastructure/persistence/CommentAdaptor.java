@@ -60,4 +60,13 @@ public class CommentAdaptor implements CommentPort {
 
         return commentEntityList.stream().map(CommentDomain::toDomainFromEntity).toList();
     }
+
+    @Override
+    @Transactional
+    public void updateComment(Long commentId, Integer likeCount, Integer dislikeCount) {
+        Optional<CommentEntity> commentEntity = commentRepository.findById(commentId);
+        Integer currentLike = commentEntity.get().getLikesCount();
+        Integer currentDislike = commentEntity.get().getDislikesCount();
+        commentEntity.get().updateReaction(currentLike + likeCount, currentDislike + dislikeCount);
+    }
 }

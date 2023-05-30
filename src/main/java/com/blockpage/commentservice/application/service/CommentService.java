@@ -1,6 +1,7 @@
 package com.blockpage.commentservice.application.service;
 
 import com.blockpage.commentservice.application.port.SaveCommentDto;
+import com.blockpage.commentservice.application.port.in.CommentCountUseCase;
 import com.blockpage.commentservice.application.port.in.CommentUseCase;
 import com.blockpage.commentservice.application.port.out.CommentPort;
 import com.blockpage.commentservice.domain.CommentDomain;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CommentService implements CommentUseCase {
+public class CommentService implements CommentUseCase, CommentCountUseCase {
 
     private final CommentPort commentPort;
 
@@ -68,5 +69,10 @@ public class CommentService implements CommentUseCase {
         List<CommentDomain> result = CommentDomain.getComment(commentDomainList);
 
         return result.stream().map(SaveCommentDto::toDtoFromDomain).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateComment(CommentCountQuery commentCountQuery) {
+        commentPort.updateComment(commentCountQuery.getCommentId(), commentCountQuery.getLikeCount(), commentCountQuery.getDislikeCount());
     }
 }
