@@ -52,6 +52,11 @@ public class CommentEntity extends BaseEntity {
         this.pin = pin;
     }
 
+    public void updateReaction(Integer likesCount, Integer dislikesCount){
+        this.likesCount = likesCount;
+        this.dislikesCount = dislikesCount;
+    }
+
     public void delete(Boolean erase, String content) {
         this.erase = erase;
         this.content = content;

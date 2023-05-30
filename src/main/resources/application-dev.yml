@@ -15,6 +15,11 @@ spring:
     username: root
     password: 1234
 
+  kafka:
+    bootstrapAddress: localhost:9092
+    commentTopic: commentCount
+    commentGroup: commentCountGroup
+
   jpa:
     properties:
       hibernate:

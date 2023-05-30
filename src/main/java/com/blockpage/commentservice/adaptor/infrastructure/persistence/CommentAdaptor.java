@@ -17,11 +17,11 @@ public class CommentAdaptor implements CommentPort {
     private final CommentRepository commentRepository;
 
     @Override
+    @Transactional
     public void saveComment(CommentDomain commentDomain) {
 
         CommentEntity commentEntity = CommentEntity.toEntityFromDomain(commentDomain);
         commentRepository.save(commentEntity);
-
 
     }
 
@@ -59,5 +59,14 @@ public class CommentAdaptor implements CommentPort {
         List<CommentEntity> commentEntityList = commentRepository.findByParentsId(commentDomain.getCommentId());
 
         return commentEntityList.stream().map(CommentDomain::toDomainFromEntity).toList();
+    }
+
+    @Override
+    @Transactional
+    public void updateComment(Long commentId, Integer likeCount, Integer dislikeCount) {
+        Optional<CommentEntity> commentEntity = commentRepository.findById(commentId);
+        Integer currentLike = commentEntity.get().getLikesCount();
+        Integer currentDislike = commentEntity.get().getDislikesCount();
+        commentEntity.get().updateReaction(currentLike + likeCount, currentDislike + dislikeCount);
     }
 }

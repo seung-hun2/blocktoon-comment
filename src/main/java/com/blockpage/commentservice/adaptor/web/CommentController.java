@@ -29,9 +29,11 @@ public class CommentController {
 
     private final CommentUseCase commentUseCase;
 
-    @PostMapping()
-    public ResponseEntity<ApiResponseView<MessageView>> addComment(@RequestBody RequestComment requestComment,
-        @RequestHeader String memberId, @RequestHeader String nickName) {
+    @PostMapping
+    public ResponseEntity<ApiResponseView<MessageView>> addComment
+        (@RequestBody RequestComment requestComment,
+        @RequestHeader String memberId,
+        @RequestHeader String nickName) {
 
         commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, memberId, nickName));
 
