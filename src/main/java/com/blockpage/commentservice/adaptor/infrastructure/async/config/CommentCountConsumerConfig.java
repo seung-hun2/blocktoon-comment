@@ -26,7 +26,7 @@ public class CommentCountConsumerConfig {
     private String groupName;
 
     @Bean
-    public ConsumerFactory<String, CommentCountMessage> ConsumerFactory() {
+    public ConsumerFactory<String, CommentCountMessage> consumerFactory() {
         JsonDeserializer<CommentCountMessage> deserializer = new JsonDeserializer<>(CommentCountMessage.class);
         deserializer.setRemoveTypeHeaders(false);
         deserializer.addTrustedPackages("*");
@@ -47,7 +47,7 @@ public class CommentCountConsumerConfig {
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, CommentCountMessage> KafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, CommentCountMessage> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(ConsumerFactory());
+        factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 }
