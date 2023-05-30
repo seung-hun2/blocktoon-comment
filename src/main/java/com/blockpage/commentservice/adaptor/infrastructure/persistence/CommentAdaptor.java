@@ -51,7 +51,10 @@ public class CommentAdaptor implements CommentPort {
     @Override
     public List<CommentDomain> getComment(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findByEpisodeId(commentDomain.getEpisodeId());
-        return commentEntityList.stream().map(CommentDomain::toDomainFromEntity).toList();
+        List<CommentEntity> commentEntityList2 = commentEntityList.stream()
+            .filter(c -> c.getChildId() == null && c.getParentsId() != null)
+            .toList();
+        return commentEntityList2.stream().map(CommentDomain::toDomainFromEntity).toList();
     }
 
     @Override

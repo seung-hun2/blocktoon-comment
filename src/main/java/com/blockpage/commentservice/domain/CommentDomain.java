@@ -2,6 +2,7 @@ package com.blockpage.commentservice.domain;
 
 import com.blockpage.commentservice.adaptor.infrastructure.entity.CommentEntity;
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class CommentDomain {
     private String childId;
     private String childNickname;
     private String content;
+    private LocalDateTime dateTime;
     private int likesCount;
     private int dislikesCount;
     private int replyCount;
@@ -25,21 +27,21 @@ public class CommentDomain {
     private Boolean pin;
 
     public static CommentDomain toDomainFrom(CommentQuery commentQuery) {
-        return new CommentDomain(
-            commentQuery.getCommentId(),
-            commentQuery.getEpisodeId(),
-            commentQuery.getParentsId(),
-            commentQuery.getParentsNickname(),
-            commentQuery.getChildId(),
-            commentQuery.getChildNickname(),
-            commentQuery.getContent(),
-            commentQuery.getLikesCount(),
-            commentQuery.getDislikesCount(),
-            commentQuery.getReplyCount(),
-            commentQuery.getReport(),
-            commentQuery.getErase(),
-            commentQuery.getPin()
-        );
+        return CommentDomain.builder()
+            .commentId(commentQuery.getCommentId())
+            .episodeId(commentQuery.getEpisodeId())
+            .parentsId(commentQuery.getParentsId())
+            .parentsNickname(commentQuery.getParentsNickname())
+            .childId(commentQuery.getChildId())
+            .childNickname(commentQuery.getChildNickname())
+            .content(commentQuery.getContent())
+            .likesCount(commentQuery.getLikesCount())
+            .dislikesCount(commentQuery.getDislikesCount())
+            .replyCount(commentQuery.getReplyCount())
+            .report(commentQuery.getReport())
+            .erase(commentQuery.getErase())
+            .pin(commentQuery.getPin())
+            .build();
     }
 
     public static CommentDomain toDomainFromId(Long commentId) {
@@ -50,12 +52,14 @@ public class CommentDomain {
 
     public static CommentDomain toDomainFromEntity(CommentEntity commentEntity){
         return CommentDomain.builder()
+            .commentId(commentEntity.getId())
             .episodeId(commentEntity.getEpisodeId())
             .parentsId(commentEntity.getParentsId())
             .parentsNickname(commentEntity.getParentsNickname())
             .childId(commentEntity.getChildId())
             .childNickname(commentEntity.getChildNickname())
             .content(commentEntity.getContent())
+            .dateTime(commentEntity.getUpdateTime())
             .likesCount(commentEntity.getLikesCount())
             .dislikesCount(commentEntity.getDislikesCount())
             .replyCount(commentEntity.getReplyCount())
