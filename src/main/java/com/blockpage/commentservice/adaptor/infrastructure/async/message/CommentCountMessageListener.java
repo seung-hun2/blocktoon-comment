@@ -18,7 +18,7 @@ public class CommentCountMessageListener {
     @KafkaListener(
         topics = "${spring.kafka.commentTopic}",
         groupId = "${spring.kafka.commentGroup}",
-        containerFactory = "dislikeKafkaListenerContainerFactory"
+        containerFactory = "KafkaListenerContainerFactory"
     )
     public void listenWithHeaders(@Payload CommentCountMessage commentCountMessage, @Headers MessageHeaders messageHeaders) {
         commentCountUseCase.updateComment(CommentCountQuery.toQuery(commentCountMessage));

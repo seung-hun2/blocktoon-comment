@@ -18,6 +18,12 @@ spring:
     username: ${spring.datasource.username}
     password: ${spring.datasource.password}
 
+  kafka:
+    bootstrapAddress: ${spring.kafka.bootstrapAddress}
+    commentTopic: commentCount
+    commentGroup: commentCountGroup
+
+
   jpa:
     properties:
       hibernate:
