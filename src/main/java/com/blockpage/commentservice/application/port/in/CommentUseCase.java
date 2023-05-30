@@ -71,20 +71,36 @@ public interface CommentUseCase {
         }
 
         public static CommentQuery toQueryFromRequest(RequestComment requestComment, String id, String nickname) {
-            return CommentQuery.builder()
-                .episodeId(requestComment.getEpisodeId())
-                .parentsId(requestComment.getParentsId())
-                .parentsNickname(requestComment.getParentsNickname())
-                .childId(id)
-                .childNickname(nickname)
-                .likesCount(0)
-                .dislikesCount(0)
-                .content(requestComment.getComment())
-                .replyCount(0)
-                .report(false)
-                .erase(false)
-                .pin(false)
-                .build();
+            if(requestComment.getParentsId().equals("")){
+                // parentsId 가 비어있다면,
+                return CommentQuery.builder()
+                    .episodeId(requestComment.getEpisodeId())
+                    .parentsId(requestComment.getParentsId())
+                    .parentsNickname(requestComment.getParentsNickname())
+                    .childId(id)
+                    .childNickname(nickname)
+                    .likesCount(0)
+                    .dislikesCount(0)
+                    .content(requestComment.getContent())
+                    .replyCount(0)
+                    .report(false)
+                    .erase(false)
+                    .pin(false)
+                    .build();
+            }else {
+                return CommentQuery.builder()
+                    .episodeId(requestComment.getEpisodeId())
+                    .parentsId(id)
+                    .parentsNickname(nickname)
+                    .likesCount(0)
+                    .dislikesCount(0)
+                    .content(requestComment.getContent())
+                    .replyCount(0)
+                    .report(false)
+                    .erase(false)
+                    .pin(false)
+                    .build();
+            }
         }
 
         public static CommentQuery toQueryFromId(Long commentId) {
