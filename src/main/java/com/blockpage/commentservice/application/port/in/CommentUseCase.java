@@ -71,7 +71,7 @@ public interface CommentUseCase {
         }
 
         public static CommentQuery toQueryFromRequest(RequestComment requestComment, String id, String nickname) {
-            if(requestComment.getParentsId().equals("")){
+            if(requestComment.getParentsId() !=null){
                 // parentsId 가 비어있다면,
                 return CommentQuery.builder()
                     .episodeId(requestComment.getEpisodeId())

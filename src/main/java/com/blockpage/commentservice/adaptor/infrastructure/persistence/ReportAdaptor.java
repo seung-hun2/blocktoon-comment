@@ -1,6 +1,7 @@
 package com.blockpage.commentservice.adaptor.infrastructure.persistence;
 
 import com.blockpage.commentservice.adaptor.infrastructure.entity.ReportEntity;
+import com.blockpage.commentservice.adaptor.infrastructure.repository.CommentRepository;
 import com.blockpage.commentservice.adaptor.infrastructure.repository.ReportRepository;
 import com.blockpage.commentservice.application.port.out.ReportPort;
 import com.blockpage.commentservice.domain.ReportDomain;
@@ -15,11 +16,16 @@ import org.springframework.stereotype.Component;
 public class ReportAdaptor implements ReportPort {
 
     private final ReportRepository reportRepository;
+    private final CommentRepository commentRepository;
 
     @Override
     public void saveReport(ReportDomain reportDomain) {
-        ReportEntity report = ReportEntity.toEntityFromDomain(reportDomain);
-        reportRepository.save(report);
+        if (commentRepository.findById(reportDomain.getCommentId()).isPresent()) {
+            ReportEntity report = ReportEntity.toEntityFromDomain(reportDomain);
+            reportRepository.save(report);
+        }else{
+            throw new RuntimeException();
+        }
     }
 
     @Override

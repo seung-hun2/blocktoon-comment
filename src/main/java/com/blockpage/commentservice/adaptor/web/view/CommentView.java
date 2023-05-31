@@ -3,6 +3,7 @@ package com.blockpage.commentservice.adaptor.web.view;
 import com.blockpage.commentservice.application.port.SaveCommentDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
@@ -10,6 +11,8 @@ import lombok.Getter;
 public class CommentView {
 
     private Long episodeId;
+    private Long commentId;
+    private LocalDateTime dateTime;
     private String parentsId;
     private String parentsNickname;
     private String childId;
@@ -22,9 +25,12 @@ public class CommentView {
     private Boolean erase;
     private Boolean pin;
 
-    public CommentView(Long episodeId, String parentsId, String parentsNickname, String childId, String childNickname, String content,
+    public CommentView(Long episodeId, Long commentId, LocalDateTime dateTime, String parentsId, String parentsNickname, String childId,
+        String childNickname, String content,
         int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
         this.episodeId = episodeId;
+        this.commentId = commentId;
+        this.dateTime = dateTime;
         this.parentsId = parentsId;
         this.parentsNickname = parentsNickname;
         this.childId = childId;
@@ -40,6 +46,8 @@ public class CommentView {
 
     public static CommentView toViewFromDto(SaveCommentDto saveCommentDto) {
         return new CommentView(saveCommentDto.getEpisodeId(),
+            saveCommentDto.getCommentId(),
+            saveCommentDto.getDateTime(),
             saveCommentDto.getParentsId(),
             saveCommentDto.getParentsNickname(),
             saveCommentDto.getChildId(),

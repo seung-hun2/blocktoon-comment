@@ -22,7 +22,7 @@ public class CommentCountConsumerConfig {
     @Value("${spring.kafka.bootstrapAddress}")
     private String bootStrapServer;
 
-    @Value("${spring.kafka.likeGroup}")
+    @Value("${spring.kafka.commentGroup}")
     private String groupName;
 
     @Bean

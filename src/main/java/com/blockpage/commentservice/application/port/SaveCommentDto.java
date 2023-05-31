@@ -2,6 +2,7 @@ package com.blockpage.commentservice.application.port;
 
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
 import com.blockpage.commentservice.domain.CommentDomain;
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,6 +11,8 @@ import lombok.Getter;
 public class SaveCommentDto {
 
     private Long episodeId;
+    private Long commentId;
+    private LocalDateTime dateTime;
     private String parentsId;
     private String parentsNickname;
     private String childId;
@@ -42,6 +45,8 @@ public class SaveCommentDto {
     public static SaveCommentDto toDtoFromDomain(CommentDomain commentDomain){
         return SaveCommentDto.builder()
             .episodeId(commentDomain.getEpisodeId())
+            .commentId(commentDomain.getCommentId())
+            .dateTime(commentDomain.getDateTime())
             .parentsId(commentDomain.getParentsId())
             .parentsNickname(commentDomain.getParentsNickname())
             .childId(commentDomain.getChildId())

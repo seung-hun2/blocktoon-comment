@@ -31,7 +31,7 @@ jobs:
         spring.datasource.username: ${{ secrets.DB_USERNAME }}
         spring.datasource.password: ${{ secrets.DB_PASSWORD }}
         eureka.client.service-url.defaultZone: ${{ secrets.EUREKA_DEFAULT_ZONE }}
-
+        spring.kafka.bootstrapAddress: ${{secrets.KAFKA_BOOTSTRAP_ADDRESS}}
     
     # Gradlew 실행 허용
     - name: Run chmod to make gradlew executable
