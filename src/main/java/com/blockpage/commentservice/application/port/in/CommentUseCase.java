@@ -70,7 +70,7 @@ public interface CommentUseCase {
             this.pin = pin;
         }
 
-        public static CommentQuery toQueryFromRequest(RequestComment requestComment, String id, String nickname) {
+        public static CommentQuery toQueryFromRequest(RequestComment requestComment, String id) {
             if(requestComment.getParentsId() !=null){
                 // parentsId 가 비어있다면,
                 return CommentQuery.builder()
@@ -78,7 +78,7 @@ public interface CommentUseCase {
                     .parentsId(requestComment.getParentsId())
                     .parentsNickname(requestComment.getParentsNickname())
                     .childId(id)
-                    .childNickname(nickname)
+                    .childNickname(requestComment.getNickname())
                     .likesCount(0)
                     .dislikesCount(0)
                     .content(requestComment.getContent())
@@ -91,7 +91,7 @@ public interface CommentUseCase {
                 return CommentQuery.builder()
                     .episodeId(requestComment.getEpisodeId())
                     .parentsId(id)
-                    .parentsNickname(nickname)
+                    .parentsNickname(requestComment.getNickname())
                     .likesCount(0)
                     .dislikesCount(0)
                     .content(requestComment.getContent())
