@@ -26,6 +26,8 @@ public class CommentEntity extends BaseEntity {
     @Column
     private Long episodeId;
     @Column
+    private Long parentsCommentId;
+    @Column
     private String parentsId;
     @Column
     private String parentsNickname;
@@ -70,6 +72,7 @@ public class CommentEntity extends BaseEntity {
     public static CommentEntity toEntityFromDomain(CommentDomain commentDomain) {
         return CommentEntity.builder()
             .episodeId(commentDomain.getEpisodeId())
+            .parentsCommentId(commentDomain.getParentsCommentId())
             .parentsId(commentDomain.getParentsId())
             .parentsNickname(commentDomain.getParentsNickname())
             .childId(commentDomain.getChildId())
