@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CommentAdaptor implements CommentPort {
@@ -23,6 +25,11 @@ public class CommentAdaptor implements CommentPort {
 
         CommentEntity commentEntity = CommentEntity.toEntityFromDomain(commentDomain);
         commentRepository.save(commentEntity);
+        if (commentEntity.getParentsCommentId() != null) {
+            Optional<CommentEntity> changeEntity = commentRepository.findById(commentEntity.getParentsCommentId());
+            Integer replyCount = changeEntity.get().getReplyCount() + 1;
+            changeEntity.get().updateReplyCount(replyCount);
+        }
 
     }
 
@@ -38,8 +45,23 @@ public class CommentAdaptor implements CommentPort {
     @Override
     @Transactional
     public void deleteComment(CommentDomain commentDomain) {
+
         Optional<CommentEntity> commentEntity = commentRepository.findById(commentDomain.getCommentId());
-        commentEntity.get().delete(true, "삭제된 댓글 입니다.");
+        // 댓글의 대댓글이 없거나 대댓글일때
+        if (commentEntity.get().getReplyCount() == 0) {
+
+            Long parents = commentEntity.get().getParentsCommentId();
+            log.info("parents : " + parents);
+            Optional<CommentEntity> changeEntity = commentRepository.findById(parents);
+            Integer replyCount = changeEntity.get().getReplyCount() - 1;
+            log.info("replyCount : " + replyCount);
+            changeEntity.get().updateReplyCount(replyCount);
+
+            commentRepository.deleteById(commentEntity.get().getId());
+        } else {
+            commentEntity.get().delete(true, "삭제된 댓글 입니다.");
+
+        }
     }
 
     @Override
@@ -62,7 +84,7 @@ public class CommentAdaptor implements CommentPort {
     public List<CommentDomain> getReply(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findAllByParentsCommentId(commentDomain.getCommentId());
         List<CommentEntity> commentEntity = commentEntityList.stream()
-            .filter(c-> c.getChildId() != null)
+            .filter(c -> c.getChildId() != null)
             .toList();
 
         return commentEntity.stream().map(CommentDomain::toDomainFromEntity).toList();

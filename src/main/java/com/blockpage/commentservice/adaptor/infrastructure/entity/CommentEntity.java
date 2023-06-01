@@ -69,6 +69,10 @@ public class CommentEntity extends BaseEntity {
         this.content = content;
     }
 
+    public void updateReplyCount(Integer replyCount){
+        this.replyCount = replyCount;
+    }
+
     public static CommentEntity toEntityFromDomain(CommentDomain commentDomain) {
         return CommentEntity.builder()
             .episodeId(commentDomain.getEpisodeId())

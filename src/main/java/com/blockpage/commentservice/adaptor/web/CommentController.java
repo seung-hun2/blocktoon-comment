@@ -40,18 +40,18 @@ public class CommentController {
     }
 
     @PatchMapping("/{commentId}")
-    public ResponseEntity<ApiResponseView<MessageView>> pinComment(@PathVariable Long id) {
+    public ResponseEntity<ApiResponseView<MessageView>> pinComment(@PathVariable Long commentId) {
         // 작가만 가능 해야함
 
-        commentUseCase.pinComment(CommentQuery.toQueryFromId(id));
+        commentUseCase.pinComment(CommentQuery.toQueryFromId(commentId));
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글이 고정되었습니다.")));
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<ApiResponseView<MessageView>> deleteComment(@PathVariable Long id) {
+    public ResponseEntity<ApiResponseView<MessageView>> deleteComment(@PathVariable Long commentId) {
         // 댓글 남긴 사람만 가능 해야함
 
-        commentUseCase.deleteComment(CommentQuery.toQueryFromId(id));
+        commentUseCase.deleteComment(CommentQuery.toQueryFromId(commentId));
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(new MessageView("해당 댓글이 삭제되었습니다.")));
     }
 
