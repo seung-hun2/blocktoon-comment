@@ -50,11 +50,13 @@ public class CommentAdaptor implements CommentPort {
         if (commentEntity.get().getReplyCount() == 0) {
 
             Long parents = commentEntity.get().getParentsCommentId();
-            log.info("parents : " + parents);
-            Optional<CommentEntity> changeEntity = commentRepository.findById(parents);
-            Integer replyCount = changeEntity.get().getReplyCount() - 1;
-            log.info("replyCount : " + replyCount);
-            changeEntity.get().updateReplyCount(replyCount);
+            if (parents != null) {
+                log.info("parents : " + parents);
+                Optional<CommentEntity> changeEntity = commentRepository.findById(parents);
+                Integer replyCount = changeEntity.get().getReplyCount() - 1;
+                log.info("replyCount : " + replyCount);
+                changeEntity.get().updateReplyCount(replyCount);
+            }
 
             commentRepository.deleteById(commentEntity.get().getId());
         } else {
