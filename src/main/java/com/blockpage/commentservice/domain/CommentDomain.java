@@ -14,6 +14,7 @@ public class CommentDomain {
 
     private Long commentId;
     private Long episodeId;
+    private Long parentsCommentId;
     private String parentsId;
     private String parentsNickname;
     private String childId;
@@ -31,6 +32,7 @@ public class CommentDomain {
         return CommentDomain.builder()
             .commentId(commentQuery.getCommentId())
             .episodeId(commentQuery.getEpisodeId())
+            .parentsCommentId(commentQuery.getParentsCommentId())
             .parentsId(commentQuery.getParentsId())
             .parentsNickname(commentQuery.getParentsNickname())
             .childId(commentQuery.getChildId())

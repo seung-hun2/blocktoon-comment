@@ -26,6 +26,7 @@ public interface CommentUseCase {
 
         private Long commentId;
         private Long episodeId;
+        private Long parentsCommentId;
         private String parentsId;
         private String parentsNickname;
         private String childId;
@@ -38,10 +39,11 @@ public interface CommentUseCase {
         private Boolean erase;
         private Boolean pin;
 
-        public CommentQuery(Long commentId, Long episodeId, String parentsId, String parentsNickname, String childId, String childNickname,
+        public CommentQuery(Long commentId, Long episodeId, Long parentsCommentId, String parentsId, String parentsNickname, String childId, String childNickname,
             String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
             this.commentId = commentId;
             this.episodeId = episodeId;
+            this.parentsCommentId = parentsCommentId;
             this.parentsId = parentsId;
             this.parentsNickname = parentsNickname;
             this.childId = childId;
@@ -55,10 +57,11 @@ public interface CommentUseCase {
             this.pin = pin;
         }
 
-        public CommentQuery(Long commentId, Long episodeId, String parentsId, String parentsNickname,
+        public CommentQuery(Long commentId, Long episodeId, Long parentsCommentId, String parentsId, String parentsNickname,
             String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
             this.commentId = commentId;
             this.episodeId = episodeId;
+            this.parentsCommentId = parentsCommentId;
             this.parentsId = parentsId;
             this.parentsNickname = parentsNickname;
             this.content = content;
@@ -75,6 +78,7 @@ public interface CommentUseCase {
                 // parentsId 가 비어있다면,
                 return CommentQuery.builder()
                     .episodeId(requestComment.getEpisodeId())
+                    .parentsCommentId(requestComment.getParentsCommentId())
                     .parentsId(requestComment.getParentsId())
                     .parentsNickname(requestComment.getParentsNickname())
                     .childId(id)
@@ -106,6 +110,12 @@ public interface CommentUseCase {
         public static CommentQuery toQueryFromId(Long commentId) {
             return CommentQuery.builder()
                 .commentId(commentId)
+                .build();
+        }
+
+        public static CommentQuery fromParentsId(String commentId){
+            return CommentQuery.builder()
+                .parentsId(commentId)
                 .build();
         }
 

@@ -8,7 +8,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
     List<CommentEntity> findByEpisodeId(Long episodeId);
 
-    List<CommentEntity> findByParentsId(Long parentsId);
+    List<CommentEntity> findAllByParentsCommentId(Long parentsId);
 
 
 }
