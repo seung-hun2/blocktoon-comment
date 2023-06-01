@@ -12,7 +12,7 @@ public class CommentView {
 
     private Long episodeId;
     private Long commentId;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private String parentsId;
     private String parentsNickname;
     private String childId;
@@ -25,7 +25,7 @@ public class CommentView {
     private Boolean erase;
     private Boolean pin;
 
-    public CommentView(Long episodeId, Long commentId, LocalDateTime dateTime, String parentsId, String parentsNickname, String childId,
+    public CommentView(Long episodeId, Long commentId, String dateTime, String parentsId, String parentsNickname, String childId,
         String childNickname, String content,
         int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
         this.episodeId = episodeId;
