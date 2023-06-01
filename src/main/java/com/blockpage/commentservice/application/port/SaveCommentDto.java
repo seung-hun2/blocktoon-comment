@@ -12,7 +12,7 @@ public class SaveCommentDto {
 
     private Long episodeId;
     private Long commentId;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private String parentsId;
     private String parentsNickname;
     private String childId;

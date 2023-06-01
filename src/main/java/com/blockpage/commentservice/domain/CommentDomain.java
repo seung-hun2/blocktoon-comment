@@ -3,6 +3,7 @@ package com.blockpage.commentservice.domain;
 import com.blockpage.commentservice.adaptor.infrastructure.entity.CommentEntity;
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,7 +19,7 @@ public class CommentDomain {
     private String childId;
     private String childNickname;
     private String content;
-    private LocalDateTime dateTime;
+    private String dateTime;
     private int likesCount;
     private int dislikesCount;
     private int replyCount;
@@ -59,7 +60,7 @@ public class CommentDomain {
             .childId(commentEntity.getChildId())
             .childNickname(commentEntity.getChildNickname())
             .content(commentEntity.getContent())
-            .dateTime(commentEntity.getUpdateTime())
+            .dateTime(commentEntity.getUpdateTime().format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm")))
             .likesCount(commentEntity.getLikesCount())
             .dislikesCount(commentEntity.getDislikesCount())
             .replyCount(commentEntity.getReplyCount())

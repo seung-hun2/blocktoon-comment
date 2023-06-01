@@ -32,10 +32,9 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<ApiResponseView<MessageView>> addComment
         (@RequestBody RequestComment requestComment,
-        @RequestHeader String memberId,
-        @RequestHeader String nickName) {
+        @RequestHeader String memberId) {
 
-        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, memberId, nickName));
+        commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, memberId));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(new ApiResponseView<>(new MessageView("댓글이 생성되었습니다.")));
     }
