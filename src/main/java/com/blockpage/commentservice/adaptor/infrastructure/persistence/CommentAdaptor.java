@@ -4,7 +4,6 @@ import com.blockpage.commentservice.adaptor.infrastructure.entity.CommentEntity;
 import com.blockpage.commentservice.adaptor.infrastructure.repository.CommentRepository;
 import com.blockpage.commentservice.application.port.out.CommentPort;
 import com.blockpage.commentservice.domain.CommentDomain;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -73,7 +72,7 @@ public class CommentAdaptor implements CommentPort {
 
     @Override
     public List<CommentDomain> getComment(CommentDomain commentDomain) {
-        List<CommentEntity> commentEntityList = commentRepository.findByEpisodeId(commentDomain.getEpisodeId());
+        List<CommentEntity> commentEntityList = commentRepository.findByEpisodeIdOrderByPinDesc(commentDomain.getEpisodeId());
         List<CommentEntity> commentEntityList2 = commentEntityList.stream()
             .filter(c -> c.getChildId() == null && c.getParentsId() != null)
             .toList();
