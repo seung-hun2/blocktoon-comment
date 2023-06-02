@@ -45,7 +45,7 @@ public class CommentCountConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CommentCountMessage> KafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, CommentCountMessage> CommentKafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, CommentCountMessage> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
