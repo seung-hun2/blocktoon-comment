@@ -1,6 +1,7 @@
 package com.blockpage.commentservice.adaptor.web;
 
 import com.blockpage.commentservice.adaptor.web.view.ApiResponseView;
+import com.blockpage.commentservice.adaptor.web.view.CommentDetailView;
 import com.blockpage.commentservice.adaptor.web.view.CommentView;
 import com.blockpage.commentservice.adaptor.web.view.MessageView;
 import com.blockpage.commentservice.application.port.SaveCommentDto;
@@ -32,7 +33,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<ApiResponseView<MessageView>> addComment
         (@RequestBody RequestComment requestComment,
-        @RequestHeader String memberId) {
+            @RequestHeader String memberId) {
 
         commentUseCase.saveComment(CommentQuery.toQueryFromRequest(requestComment, memberId));
 
@@ -56,13 +57,14 @@ public class CommentController {
     }
 
     @GetMapping("/{episodeId}")
-    public ResponseEntity<ApiResponseView<List<CommentView>>> comments(@PathVariable Long episodeId) {
+    public ResponseEntity<ApiResponseView<CommentDetailView>> comments(@PathVariable Long episodeId) {
 
         List<SaveCommentDto> saveCommentDtos = commentUseCase.getComment(CommentQuery.toQueryFromEpisodeId(episodeId));
-        List<CommentView> commentViewList;
-        commentViewList = saveCommentDtos.stream().map(CommentView::toViewFromDto).collect(Collectors.toList());
+        Integer count = commentUseCase.getCommentCount(CommentQuery.toQueryFromEpisodeId(episodeId));
+        List<CommentView> commentViewList = saveCommentDtos.stream().map(CommentView::toViewFromDto).collect(Collectors.toList());
+        CommentDetailView commentDetailView = CommentDetailView.toView(count, commentViewList);
 
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentViewList));
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponseView<>(commentDetailView));
     }
 
     @GetMapping("/reply/{commentId}")

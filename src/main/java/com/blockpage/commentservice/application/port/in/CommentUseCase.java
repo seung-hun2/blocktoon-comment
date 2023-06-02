@@ -20,6 +20,8 @@ public interface CommentUseCase {
 
     List<SaveCommentDto> getReply(CommentQuery commentQuery);
 
+    Integer getCommentCount(CommentQuery commentQuery);
+
     @Getter
     @Builder
     class CommentQuery {

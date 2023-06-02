@@ -15,4 +15,5 @@ public interface CommentPort {
 
     void updateComment(Long commentId, Integer likeCount, Integer dislikeCount);
 
+    Integer getCommentCount(Long commentId);
 }

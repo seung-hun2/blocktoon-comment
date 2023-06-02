@@ -52,6 +52,11 @@ public class CommentDomain {
             .commentId(commentId)
             .build();
     }
+    public static CommentDomain toDomainFromEpisodeId(Long episodeId) {
+        return CommentDomain.builder()
+            .episodeId(episodeId)
+            .build();
+    }
 
     public static CommentDomain toDomainFromEntity(CommentEntity commentEntity){
         return CommentDomain.builder()

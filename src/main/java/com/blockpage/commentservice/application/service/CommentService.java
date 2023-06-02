@@ -72,6 +72,13 @@ public class CommentService implements CommentUseCase, CommentCountUseCase {
     }
 
     @Override
+    public Integer getCommentCount(CommentQuery commentQuery) {
+        CommentDomain commentDomain = CommentDomain.toDomainFromEpisodeId(commentQuery.getEpisodeId());
+
+        return commentPort.getCommentCount(commentDomain.getEpisodeId());
+    }
+
+    @Override
     public void updateComment(CommentCountQuery commentCountQuery) {
         commentPort.updateComment(commentCountQuery.getCommentId(), commentCountQuery.getLikeCount(), commentCountQuery.getDislikeCount());
     }
