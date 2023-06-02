@@ -95,8 +95,8 @@ public class CommentAdaptor implements CommentPort {
     @Transactional
     public void updateComment(Long commentId, Integer likeCount, Integer dislikeCount) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(commentId);
-        Integer currentLike = commentEntity.get().getLikesCount();
-        Integer currentDislike = commentEntity.get().getDislikesCount();
-        commentEntity.get().updateReaction(currentLike + likeCount, currentDislike + dislikeCount);
+        Integer currentLike = commentEntity.get().getLikesCount()+likeCount;
+        Integer currentDislike = commentEntity.get().getDislikesCount()+dislikeCount;
+        commentEntity.get().updateReaction(currentLike, currentDislike);
     }
 }
