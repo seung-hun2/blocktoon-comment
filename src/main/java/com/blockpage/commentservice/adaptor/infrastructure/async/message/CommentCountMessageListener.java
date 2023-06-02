@@ -23,6 +23,7 @@ public class CommentCountMessageListener {
         containerFactory = "CommentKafkaListenerContainerFactory"
     )
     public void listenWithHeaders(@Payload CommentCountMessage commentCountMessage, @Headers MessageHeaders messageHeaders) {
+        log.info("commentID : "+commentCountMessage.getCommentId());
         log.info("likeCount : "+commentCountMessage.getLikeCount());
         log.info("dislikeCount : "+commentCountMessage.getDislikeCount());
         commentCountUseCase.updateComment(CommentCountQuery.toQuery(commentCountMessage));
