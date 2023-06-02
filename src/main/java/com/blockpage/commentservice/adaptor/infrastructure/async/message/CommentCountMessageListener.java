@@ -24,8 +24,8 @@ public class CommentCountMessageListener {
     )
     public void listenWithHeaders(@Payload CommentCountMessage commentCountMessage, @Headers MessageHeaders messageHeaders) {
         log.info("commentID : "+commentCountMessage.getCommentId());
-        log.info("likeCount : "+commentCountMessage.getLikeCount());
-        log.info("dislikeCount : "+commentCountMessage.getDislikeCount());
+        log.info("likeCount : "+commentCountMessage.getLikesCount());
+        log.info("dislikeCount : "+commentCountMessage.getDisLikesCount());
         commentCountUseCase.updateComment(CommentCountQuery.toQuery(commentCountMessage));
     }
 }

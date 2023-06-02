@@ -19,8 +19,8 @@ public interface CommentCountUseCase {
         public static CommentCountQuery toQuery(CommentCountMessage commentCountMessage) {
             return CommentCountQuery.builder()
                 .commentId(commentCountMessage.getCommentId())
-                .likeCount(commentCountMessage.getLikeCount())
-                .dislikeCount(commentCountMessage.getDislikeCount())
+                .likeCount(commentCountMessage.getLikesCount())
+                .dislikeCount(commentCountMessage.getDisLikesCount())
                 .build();
         }
     }

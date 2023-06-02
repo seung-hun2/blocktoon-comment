@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class CommentCountMessage {
 
     private Long commentId;
-    private Integer likeCount;
-    private Integer dislikeCount;
+    private Integer likesCount;
+    private Integer disLikesCount;
 }
