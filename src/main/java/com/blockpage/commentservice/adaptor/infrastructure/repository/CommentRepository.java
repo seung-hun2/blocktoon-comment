@@ -10,5 +10,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
     List<CommentEntity> findAllByParentsCommentId(Long parentsId);
 
+    List<CommentEntity> findAllByEpisodeIdAndEraseIsFalse(Long episodeId);
+
 
 }

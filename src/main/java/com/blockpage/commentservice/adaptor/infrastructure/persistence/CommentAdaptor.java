@@ -101,4 +101,9 @@ public class CommentAdaptor implements CommentPort {
         Integer currentDislike = commentEntity.get().getDislikesCount()+dislikeCount;
         commentEntity.get().updateReaction(currentLike, currentDislike);
     }
+
+    @Override
+    public Integer getCommentCount(Long episodeId) {
+        return commentRepository.findAllByEpisodeIdAndEraseIsFalse(episodeId).size();
+    }
 }
