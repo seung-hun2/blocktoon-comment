@@ -6,10 +6,10 @@ import com.blockpage.commentservice.application.port.out.CommentPort;
 import com.blockpage.commentservice.domain.CommentDomain;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -73,6 +73,7 @@ public class CommentAdaptor implements CommentPort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CommentDomain> getComment(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findByEpisodeIdOrderByPinDesc(commentDomain.getEpisodeId());
         List<CommentEntity> commentEntityList2 = commentEntityList.stream()
@@ -82,6 +83,7 @@ public class CommentAdaptor implements CommentPort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CommentDomain> getReply(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findAllByParentsCommentId(commentDomain.getCommentId());
         List<CommentEntity> commentEntity = commentEntityList.stream()
@@ -95,14 +97,19 @@ public class CommentAdaptor implements CommentPort {
     @Transactional
     public void updateComment(Long commentId, Integer likeCount, Integer dislikeCount) {
         Optional<CommentEntity> commentEntity = commentRepository.findById(commentId);
-        if(likeCount == null) likeCount = 0;
-        if(dislikeCount == null) dislikeCount = 0;
-        Integer currentLike = commentEntity.get().getLikesCount()+likeCount;
-        Integer currentDislike = commentEntity.get().getDislikesCount()+dislikeCount;
+        if (likeCount == null) {
+            likeCount = 0;
+        }
+        if (dislikeCount == null) {
+            dislikeCount = 0;
+        }
+        Integer currentLike = commentEntity.get().getLikesCount() + likeCount;
+        Integer currentDislike = commentEntity.get().getDislikesCount() + dislikeCount;
         commentEntity.get().updateReaction(currentLike, currentDislike);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Integer getCommentCount(Long episodeId) {
         return commentRepository.findAllByEpisodeIdAndEraseIsFalse(episodeId).size();
     }

@@ -7,9 +7,9 @@ import com.blockpage.commentservice.application.port.out.ReportPort;
 import com.blockpage.commentservice.domain.ReportDomain;
 
 import java.util.List;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -19,11 +19,12 @@ public class ReportAdaptor implements ReportPort {
     private final CommentRepository commentRepository;
 
     @Override
+    @Transactional
     public void saveReport(ReportDomain reportDomain) {
         if (commentRepository.findById(reportDomain.getCommentId()).isPresent()) {
             ReportEntity report = ReportEntity.toEntityFromDomain(reportDomain);
             reportRepository.save(report);
-        }else{
+        } else {
             throw new RuntimeException();
         }
     }
@@ -35,6 +36,7 @@ public class ReportAdaptor implements ReportPort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ReportDomain> getReport() {
 
         List<ReportEntity> reportEntityList = reportRepository.findAll();
