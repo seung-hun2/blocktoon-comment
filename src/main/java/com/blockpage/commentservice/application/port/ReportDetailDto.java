@@ -10,6 +10,7 @@ import lombok.Getter;
 @Builder
 public class ReportDetailDto {
 
+    private Long commentId;
     private String memberId;
     private String memberNickname;
     private String content;
@@ -18,6 +19,7 @@ public class ReportDetailDto {
 
     public static ReportDetailDto toDtoFromDomain(ReportDomain reportDomain) {
         return ReportDetailDto.builder()
+            .commentId(reportDomain.getCommentId())
             .memberId(reportDomain.getMemberId())
             .memberNickname(reportDomain.getMemberNickname())
             .content(reportDomain.getContent())
