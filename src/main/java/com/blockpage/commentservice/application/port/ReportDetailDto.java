@@ -10,6 +10,7 @@ import lombok.Getter;
 @Builder
 public class ReportDetailDto {
 
+    private String memberId;
     private String memberNickname;
     private String content;
     private LocalDateTime reportDate;
@@ -17,6 +18,7 @@ public class ReportDetailDto {
 
     public static ReportDetailDto toDtoFromDomain(ReportDomain reportDomain) {
         return ReportDetailDto.builder()
+            .memberId(reportDomain.getMemberId())
             .memberNickname(reportDomain.getMemberNickname())
             .content(reportDomain.getContent())
             .reportDate(reportDomain.getReportDate())
