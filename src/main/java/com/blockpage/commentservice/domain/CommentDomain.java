@@ -19,6 +19,8 @@ public class CommentDomain {
     private String parentsNickname;
     private String childId;
     private String childNickname;
+    private String myProfileImage;
+    private String myProfileSkin;
     private String content;
     private String dateTime;
     private int likesCount;
@@ -37,6 +39,8 @@ public class CommentDomain {
             .parentsNickname(commentQuery.getParentsNickname())
             .childId(commentQuery.getChildId())
             .childNickname(commentQuery.getChildNickname())
+            .myProfileImage(commentQuery.getMyProfileImage())
+            .myProfileSkin(commentQuery.getMyProfileSkin())
             .content(commentQuery.getContent())
             .likesCount(commentQuery.getLikesCount())
             .dislikesCount(commentQuery.getDislikesCount())
