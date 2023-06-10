@@ -17,6 +17,8 @@ public class SaveCommentDto {
     private String parentsNickname;
     private String childId;
     private String childNickname;
+    private String myProfileImage;
+    private String myProfileSkin;
     private String comment;
     private int likesCount;
     private int dislikesCount;
@@ -51,6 +53,8 @@ public class SaveCommentDto {
             .parentsNickname(commentDomain.getParentsNickname())
             .childId(commentDomain.getChildId())
             .childNickname(commentDomain.getChildNickname())
+            .myProfileImage(commentDomain.getMyProfileImage())
+            .myProfileSkin(commentDomain.getMyProfileSkin())
             .comment(commentDomain.getContent())
             .likesCount(commentDomain.getLikesCount())
             .dislikesCount(commentDomain.getDislikesCount())

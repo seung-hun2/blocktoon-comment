@@ -70,6 +70,8 @@ public class CommentDomain {
             .parentsNickname(commentEntity.getParentsNickname())
             .childId(commentEntity.getChildId())
             .childNickname(commentEntity.getChildNickname())
+            .myProfileImage(commentEntity.getMyProfileImage())
+            .myProfileSkin(commentEntity.getMyProfileSkin())
             .content(commentEntity.getContent())
             .dateTime(commentEntity.getUpdateTime().format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm")))
             .likesCount(commentEntity.getLikesCount())
