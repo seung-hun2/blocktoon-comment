@@ -17,8 +17,8 @@ public class CommentView {
     private String parentsNickname;
     private String childId;
     private String childNickname;
-    private String myProfileImage;
-    private String myProfileSkin;
+    private String profileImage;
+    private String profileSkin;
     private String content;
     private int likesCount;
     private int dislikesCount;
@@ -37,8 +37,8 @@ public class CommentView {
         this.parentsNickname = parentsNickname;
         this.childId = childId;
         this.childNickname = childNickname;
-        this.myProfileImage = myProfileImage;
-        this.myProfileSkin = myProfileSkin;
+        this.profileImage = myProfileImage;
+        this.profileSkin = myProfileSkin;
         this.content = content;
         this.likesCount = likesCount;
         this.dislikesCount = dislikesCount;

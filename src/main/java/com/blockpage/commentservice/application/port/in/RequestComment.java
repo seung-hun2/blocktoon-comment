@@ -11,7 +11,7 @@ public class RequestComment {
     private Long parentsCommentId;
     private String parentsId;
     private String parentsNickname;
-    private String myProfileImage;
-    private String myProfileSkin;
+    private String profileImage;
+    private String profileSkin;
 
 }
