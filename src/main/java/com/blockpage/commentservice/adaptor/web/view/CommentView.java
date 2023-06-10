@@ -17,6 +17,8 @@ public class CommentView {
     private String parentsNickname;
     private String childId;
     private String childNickname;
+    private String profileImage;
+    private String profileSkin;
     private String content;
     private int likesCount;
     private int dislikesCount;
@@ -26,7 +28,7 @@ public class CommentView {
     private Boolean pin;
 
     public CommentView(Long episodeId, Long commentId, String dateTime, String parentsId, String parentsNickname, String childId,
-        String childNickname, String content,
+        String childNickname, String myProfileImage, String myProfileSkin, String content,
         int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
         this.episodeId = episodeId;
         this.commentId = commentId;
@@ -35,6 +37,8 @@ public class CommentView {
         this.parentsNickname = parentsNickname;
         this.childId = childId;
         this.childNickname = childNickname;
+        this.profileImage = myProfileImage;
+        this.profileSkin = myProfileSkin;
         this.content = content;
         this.likesCount = likesCount;
         this.dislikesCount = dislikesCount;
@@ -52,6 +56,8 @@ public class CommentView {
             saveCommentDto.getParentsNickname(),
             saveCommentDto.getChildId(),
             saveCommentDto.getChildNickname(),
+            saveCommentDto.getMyProfileImage(),
+            saveCommentDto.getMyProfileSkin(),
             saveCommentDto.getComment(),
             saveCommentDto.getLikesCount(),
             saveCommentDto.getDislikesCount(),

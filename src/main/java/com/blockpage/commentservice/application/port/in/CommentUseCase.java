@@ -33,6 +33,9 @@ public interface CommentUseCase {
         private String parentsNickname;
         private String childId;
         private String childNickname;
+        private String myProfileImage;
+        private String myProfileSkin;
+
         private String content;
         private int likesCount;
         private int dislikesCount;
@@ -41,8 +44,10 @@ public interface CommentUseCase {
         private Boolean erase;
         private Boolean pin;
 
-        public CommentQuery(Long commentId, Long episodeId, Long parentsCommentId, String parentsId, String parentsNickname, String childId, String childNickname,
-            String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
+        public CommentQuery(Long commentId, Long episodeId, Long parentsCommentId, String parentsId, String parentsNickname, String childId,
+            String childNickname,
+            String myProfileImage, String myProfileSkin, String content, int likesCount, int dislikesCount, int replyCount, Boolean report,
+            Boolean erase, Boolean pin) {
             this.commentId = commentId;
             this.episodeId = episodeId;
             this.parentsCommentId = parentsCommentId;
@@ -50,6 +55,8 @@ public interface CommentUseCase {
             this.parentsNickname = parentsNickname;
             this.childId = childId;
             this.childNickname = childNickname;
+            this.myProfileImage = myProfileImage;
+            this.myProfileSkin = myProfileSkin;
             this.content = content;
             this.likesCount = likesCount;
             this.dislikesCount = dislikesCount;
@@ -60,12 +67,15 @@ public interface CommentUseCase {
         }
 
         public CommentQuery(Long commentId, Long episodeId, Long parentsCommentId, String parentsId, String parentsNickname,
-            String content, int likesCount, int dislikesCount, int replyCount, Boolean report, Boolean erase, Boolean pin) {
+            String myProfileImage, String myProfileSkin, String content, int likesCount, int dislikesCount, int replyCount, Boolean report,
+            Boolean erase, Boolean pin) {
             this.commentId = commentId;
             this.episodeId = episodeId;
             this.parentsCommentId = parentsCommentId;
             this.parentsId = parentsId;
             this.parentsNickname = parentsNickname;
+            this.myProfileImage = myProfileImage;
+            this.myProfileSkin = myProfileSkin;
             this.content = content;
             this.likesCount = likesCount;
             this.dislikesCount = dislikesCount;
@@ -76,7 +86,7 @@ public interface CommentUseCase {
         }
 
         public static CommentQuery toQueryFromRequest(RequestComment requestComment, String id) {
-            if(requestComment.getParentsId() !=null){
+            if (requestComment.getParentsId() != null) {
                 // parentsId 가 비어있다면,
                 return CommentQuery.builder()
                     .episodeId(requestComment.getEpisodeId())
@@ -85,6 +95,8 @@ public interface CommentUseCase {
                     .parentsNickname(requestComment.getParentsNickname())
                     .childId(id)
                     .childNickname(requestComment.getNickname())
+                    .myProfileImage(requestComment.getProfileImage())
+                    .myProfileSkin(requestComment.getProfileSkin())
                     .likesCount(0)
                     .dislikesCount(0)
                     .content(requestComment.getContent())
@@ -93,11 +105,13 @@ public interface CommentUseCase {
                     .erase(false)
                     .pin(false)
                     .build();
-            }else {
+            } else {
                 return CommentQuery.builder()
                     .episodeId(requestComment.getEpisodeId())
                     .parentsId(id)
                     .parentsNickname(requestComment.getNickname())
+                    .myProfileImage(requestComment.getProfileImage())
+                    .myProfileSkin(requestComment.getProfileSkin())
                     .likesCount(0)
                     .dislikesCount(0)
                     .content(requestComment.getContent())
@@ -115,7 +129,7 @@ public interface CommentUseCase {
                 .build();
         }
 
-        public static CommentQuery fromParentsId(String commentId){
+        public static CommentQuery fromParentsId(String commentId) {
             return CommentQuery.builder()
                 .parentsId(commentId)
                 .build();

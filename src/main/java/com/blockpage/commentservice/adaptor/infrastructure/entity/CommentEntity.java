@@ -36,6 +36,10 @@ public class CommentEntity extends BaseEntity {
     @Column
     private String childNickname;
     @Column
+    private String myProfileImage;
+    @Column
+    private String myProfileSkin;
+    @Column
     private String content;
     @Column
     private int likesCount;
@@ -81,6 +85,8 @@ public class CommentEntity extends BaseEntity {
             .parentsNickname(commentDomain.getParentsNickname())
             .childId(commentDomain.getChildId())
             .childNickname(commentDomain.getChildNickname())
+            .myProfileImage(commentDomain.getMyProfileImage())
+            .myProfileSkin(commentDomain.getMyProfileSkin())
             .content(commentDomain.getContent())
             .replyCount(commentDomain.getReplyCount())
             .likesCount(commentDomain.getLikesCount())
