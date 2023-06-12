@@ -9,6 +9,7 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -22,6 +23,7 @@ public class CommentCountMessageListener {
         groupId = "${spring.kafka.commentGroup}",
         containerFactory = "CommentKafkaListenerContainerFactory"
     )
+    @Transactional
     public void listenWithHeaders(@Payload CommentCountMessage commentCountMessage, @Headers MessageHeaders messageHeaders) {
         log.info("commentID : "+commentCountMessage.getCommentId());
         log.info("likeCount : "+commentCountMessage.getLikesCount());

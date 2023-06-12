@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -79,6 +80,7 @@ public class CommentService implements CommentUseCase, CommentCountUseCase {
     }
 
     @Override
+    @Transactional
     public void updateComment(CommentCountQuery commentCountQuery) {
         commentPort.updateComment(commentCountQuery.getCommentId(), commentCountQuery.getLikeCount(), commentCountQuery.getDislikeCount());
     }
