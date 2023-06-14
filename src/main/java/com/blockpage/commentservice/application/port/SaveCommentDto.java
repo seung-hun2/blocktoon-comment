@@ -2,7 +2,6 @@ package com.blockpage.commentservice.application.port;
 
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
 import com.blockpage.commentservice.domain.CommentDomain;
-import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -57,7 +56,7 @@ public class SaveCommentDto {
             .myProfileSkin(commentDomain.getMyProfileSkin())
             .comment(commentDomain.getContent())
             .likesCount(commentDomain.getLikesCount())
-            .dislikesCount(commentDomain.getDislikesCount())
+            .dislikesCount(commentDomain.getDisLikesCount())
             .replyCount(commentDomain.getReplyCount())
             .report(commentDomain.getReport())
             .erase(commentDomain.getErase())

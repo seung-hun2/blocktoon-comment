@@ -13,7 +13,7 @@ public interface CommentPort {
     List<CommentDomain> getComment(CommentDomain commentDomain);
     List<CommentDomain> getReply(CommentDomain commentDomain);
 
-    void updateComment(Long commentId, Integer likeCount, Integer dislikeCount);
+    void updateComment(CommentDomain commentDomain);
 
     Integer getCommentCount(Long commentId);
 }

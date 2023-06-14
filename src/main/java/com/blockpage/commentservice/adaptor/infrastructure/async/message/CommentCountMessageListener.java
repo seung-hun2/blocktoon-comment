@@ -23,11 +23,11 @@ public class CommentCountMessageListener {
         groupId = "${spring.kafka.commentGroup}",
         containerFactory = "CommentKafkaListenerContainerFactory"
     )
-    @Transactional
-    public void listenWithHeaders(@Payload CommentCountMessage commentCountMessage, @Headers MessageHeaders messageHeaders) {
+    public void listenWithHeaders(@Payload(required = false) CommentCountMessage commentCountMessage, @Headers MessageHeaders messageHeaders) {
         log.info("commentID : "+commentCountMessage.getCommentId());
         log.info("likeCount : "+commentCountMessage.getLikesCount());
         log.info("dislikeCount : "+commentCountMessage.getDisLikesCount());
+
         commentCountUseCase.updateComment(CommentCountQuery.toQuery(commentCountMessage));
     }
 }

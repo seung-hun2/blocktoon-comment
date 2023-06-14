@@ -59,8 +59,8 @@ public class CommentEntity extends BaseEntity {
     }
 
     public void updateReaction(Integer likesCount, Integer dislikesCount){
-        this.likesCount = likesCount;
-        this.dislikesCount = dislikesCount;
+        this.likesCount += likesCount;
+        this.dislikesCount += dislikesCount;
     }
 
     public void delete(Boolean erase, String content) {
@@ -90,7 +90,7 @@ public class CommentEntity extends BaseEntity {
             .content(commentDomain.getContent())
             .replyCount(commentDomain.getReplyCount())
             .likesCount(commentDomain.getLikesCount())
-            .dislikesCount(commentDomain.getDislikesCount())
+            .dislikesCount(commentDomain.getDisLikesCount())
             .report(commentDomain.getReport())
             .erase(commentDomain.getErase())
             .pin(commentDomain.getPin())

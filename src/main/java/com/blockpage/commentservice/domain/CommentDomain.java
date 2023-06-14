@@ -1,8 +1,8 @@
 package com.blockpage.commentservice.domain;
 
 import com.blockpage.commentservice.adaptor.infrastructure.entity.CommentEntity;
+import com.blockpage.commentservice.application.port.in.CommentCountUseCase.CommentCountQuery;
 import com.blockpage.commentservice.application.port.in.CommentUseCase.CommentQuery;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.Builder;
@@ -24,7 +24,7 @@ public class CommentDomain {
     private String content;
     private String dateTime;
     private int likesCount;
-    private int dislikesCount;
+    private int disLikesCount;
     private int replyCount;
     private Boolean report;
     private Boolean erase;
@@ -43,7 +43,7 @@ public class CommentDomain {
             .myProfileSkin(commentQuery.getMyProfileSkin())
             .content(commentQuery.getContent())
             .likesCount(commentQuery.getLikesCount())
-            .dislikesCount(commentQuery.getDislikesCount())
+            .disLikesCount(commentQuery.getDislikesCount())
             .replyCount(commentQuery.getReplyCount())
             .report(commentQuery.getReport())
             .erase(commentQuery.getErase())
@@ -62,6 +62,14 @@ public class CommentDomain {
             .build();
     }
 
+    public static CommentDomain fromCommentCountQuery(CommentCountQuery commentCountQuery){
+        return CommentDomain.builder()
+            .commentId(commentCountQuery.getCommentId())
+            .likesCount(commentCountQuery.getLikesCount())
+            .disLikesCount(commentCountQuery.getDisLikesCount())
+            .build();
+    }
+
     public static CommentDomain toDomainFromEntity(CommentEntity commentEntity){
         return CommentDomain.builder()
             .commentId(commentEntity.getId())
@@ -75,7 +83,7 @@ public class CommentDomain {
             .content(commentEntity.getContent())
             .dateTime(commentEntity.getUpdateTime().format(DateTimeFormatter.ofPattern("yy.MM.dd HH:mm")))
             .likesCount(commentEntity.getLikesCount())
-            .dislikesCount(commentEntity.getDislikesCount())
+            .disLikesCount(commentEntity.getDislikesCount())
             .replyCount(commentEntity.getReplyCount())
             .report(commentEntity.getReport())
             .erase(commentEntity.getErase())

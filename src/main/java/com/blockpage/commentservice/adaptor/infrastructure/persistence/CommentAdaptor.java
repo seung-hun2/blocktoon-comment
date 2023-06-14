@@ -6,9 +6,11 @@ import com.blockpage.commentservice.application.port.out.CommentPort;
 import com.blockpage.commentservice.domain.CommentDomain;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
@@ -17,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentAdaptor implements CommentPort {
 
     private final CommentRepository commentRepository;
+
+    private final EntityManager entityManager;
 
     @Override
     @Transactional
@@ -73,6 +77,15 @@ public class CommentAdaptor implements CommentPort {
     }
 
     @Override
+    @Transactional
+    public void updateComment(CommentDomain commentDomain) {
+
+        Optional<CommentEntity> commentEntity = commentRepository.findById(commentDomain.getCommentId());
+        commentEntity.get().updateReaction(commentDomain.getLikesCount(), commentDomain.getDisLikesCount());
+//        commentRepository.save(commentEntity.get());
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<CommentDomain> getComment(CommentDomain commentDomain) {
         List<CommentEntity> commentEntityList = commentRepository.findByEpisodeIdOrderByPinDesc(commentDomain.getEpisodeId());
@@ -93,20 +106,6 @@ public class CommentAdaptor implements CommentPort {
         return commentEntity.stream().map(CommentDomain::toDomainFromEntity).toList();
     }
 
-    @Override
-    @Transactional
-    public void updateComment(Long commentId, Integer likeCount, Integer dislikeCount) {
-        Optional<CommentEntity> commentEntity = commentRepository.findById(commentId);
-        if (likeCount == null) {
-            likeCount = 0;
-        }
-        if (dislikeCount == null) {
-            dislikeCount = 0;
-        }
-        Integer currentLike = commentEntity.get().getLikesCount() + likeCount;
-        Integer currentDislike = commentEntity.get().getDislikesCount() + dislikeCount;
-        commentEntity.get().updateReaction(currentLike, currentDislike);
-    }
 
     @Override
     @Transactional(readOnly = true)

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +51,13 @@ public class CommentService implements CommentUseCase, CommentCountUseCase {
     }
 
     @Override
+    public void updateComment(CommentCountQuery commentCountQuery) {
+        CommentDomain commentDomain = CommentDomain.fromCommentCountQuery(commentCountQuery);
+        System.out.println("service");
+        commentPort.updateComment(commentDomain);
+    }
+
+    @Override
     public List<SaveCommentDto> getComment(CommentQuery commentQuery) {
 
         CommentDomain commentDomain = CommentDomain.toDomainFrom(commentQuery);
@@ -79,9 +85,5 @@ public class CommentService implements CommentUseCase, CommentCountUseCase {
         return commentPort.getCommentCount(commentDomain.getEpisodeId());
     }
 
-    @Override
-    @Transactional
-    public void updateComment(CommentCountQuery commentCountQuery) {
-        commentPort.updateComment(commentCountQuery.getCommentId(), commentCountQuery.getLikeCount(), commentCountQuery.getDislikeCount());
-    }
+
 }

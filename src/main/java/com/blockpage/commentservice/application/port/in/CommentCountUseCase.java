@@ -8,19 +8,20 @@ public interface CommentCountUseCase {
 
     void updateComment(CommentCountQuery commentCountQuery);
 
+
     @Getter
     @Builder
     class CommentCountQuery {
 
         private Long commentId;
-        private Integer likeCount;
-        private Integer dislikeCount;
+        private Integer likesCount;
+        private Integer disLikesCount;
 
         public static CommentCountQuery toQuery(CommentCountMessage commentCountMessage) {
             return CommentCountQuery.builder()
                 .commentId(commentCountMessage.getCommentId())
-                .likeCount(commentCountMessage.getLikesCount())
-                .dislikeCount(commentCountMessage.getDisLikesCount())
+                .likesCount(commentCountMessage.getLikesCount())
+                .disLikesCount(commentCountMessage.getDisLikesCount())
                 .build();
         }
     }
