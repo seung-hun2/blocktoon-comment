@@ -13,11 +13,10 @@ spring:
     name: comment-service
 
   datasource:
-    master:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: ${spring.datasource.master.jdbc-url}
-      username: ${spring.datasource.master.username}
-      password: ${spring.datasource.master.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${spring.datasource.master.jdbc-url}
+    username: ${spring.datasource.master.username}
+    password: ${spring.datasource.master.password}
 
 #  datasource:
 #    master:
